@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1522095003 source:c:\1ercuatrimestretecnicatura\clases_prog\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+	<conio.h>
+
+1522093790 c:\1ercuatrimestretecnicatura\clases_prog\tp1\funciones.h
+
