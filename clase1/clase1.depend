@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1521581835 source:e:\test\mercedesbigi\clases_prog\clase1\main.c
+	<stdio.h>
+	<conio.h>
+	<stdlib.h>
+	<ctype.h>
+

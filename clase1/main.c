@@ -6,7 +6,7 @@
 int main()
 /* funcion principal punto de entrada en C, int digo que devulve en este caso int un entero en () digo que recibe*/
 {
-    printf("Hello world mercedes Bigi!\n");
+    printf("Hello world roberto!\n");
     /* salida en pantalla */
 
     /* de datos int (%d) float (%f) char (%c)  distinto espacio de memoria segun en tipo de dato tmabien por el sistema operativo*/
