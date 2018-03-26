@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#define MAX_VALOR 100
+#define MIN_VALOR 0
 /*prototipo*/
 // 1 declaro la funcion
 int sumar(int numero1, int numero2);
@@ -24,8 +26,7 @@ int main()
     int num2;
     char op;
     float resultado;
-    int minimo = 0;
-    int maximo = 100;
+
 
 
 
@@ -34,9 +35,9 @@ int main()
     /*scanf("%d", &num1);*/
     //num1=leerNumero();
 
-    num1 = pediryleerNumero(minimo, maximo);
+    num1 = pediryleerNumero(MIN_VALOR, MAX_VALOR);
     op = pedirOperador();
-    num2 = pediryleerNumero(minimo, maximo);
+    num2 = pediryleerNumero(MIN_VALOR, MAX_VALOR);
     resultado = Calcular(num1, op, num2);
     printf("Resultado: %.2f", resultado);
 
@@ -114,7 +115,7 @@ char pedirOperador()
 }
 
 /** \brief
- * realiza la el calculo segun la operacion
+ * Realiza la el calculo segun la operacion
  * \param  num1 el primer numero
  * \param tipo de operador
  * \param num2 el primer numero
