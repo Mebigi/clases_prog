@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1522155564 source:c:\test\mercedesbigi\clases_prog\clase4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"fuciones.h"
+
+1522154964 c:\test\mercedesbigi\clases_prog\clase4\fuciones.h
+
