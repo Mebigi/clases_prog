@@ -65,14 +65,13 @@ int main()
 
                 printf("Ingresar 1er operando (A=x):\n");
                 numeroUno = leerNumero();
-
                 opcion = elegirOpciones();
 
             case 2:
                 printf("Ingresar 2do operando (B=y):\n");
                 numeroDos = leerNumero();
-
                 opcion = elegirOpciones();
+                /* */
 
 
 
@@ -80,13 +79,12 @@ int main()
             case 3:
 
                 printf("La suma (A+B): %d y %d", numeroUno, numeroDos);
-
                 resultado = sumar(numeroUno, numeroDos);
-
                 printf("\nResultado %d ", resultado);
+                opcion = elegirOpciones();
 
 
-                break;
+
             case 4:
                 printf("La resta (A-B):\n");
                 resultado = restar(numeroUno, numeroDos);
@@ -120,9 +118,9 @@ int main()
 
 
     return 0;
-}
 
-}
+
+    }
 
 
 int leerNumero()
@@ -137,13 +135,14 @@ int leerNumero()
 
     return numero;
 }
+
 int elegirOpciones()
 {
         int opcion;
         printf("Elegir opcion del 1 al 9\n");
         scanf("%d",&opcion);
 
-        while (opcion<=0 || opcion>9 )
+        while (opcion<=0 || opcion>9)
         {
            printf("Elegir opcion Válida (del 1 al 9)\n");
            scanf("%d",&opcion);
