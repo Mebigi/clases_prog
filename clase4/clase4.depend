@@ -7,3 +7,15 @@
 
 1522154964 c:\test\mercedesbigi\clases_prog\clase4\fuciones.h
 
+1522170375 source:c:\1ercuatrimestretecnicatura\clases_prog\clase4\fuciones.c
+	"fuciones.h"
+	<stdio.h>
+
+1522170375 c:\1ercuatrimestretecnicatura\clases_prog\clase4\fuciones.h
+
+1522170375 source:c:\1ercuatrimestretecnicatura\clases_prog\clase4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"fuciones.h"
+
