@@ -3,6 +3,7 @@
 #include "funciones.h"
 #include <conio.h>
 
+
 /*
 
 1 Trabajo práctico Nº 1
@@ -30,23 +31,61 @@ que contenga las funciones para realizar las 4 operaciones.
 • Documentar todas las funciones
 
 */
+/** \brief leer un numero ingresado flotante
+ * \return numero ingresado flotante
+ *
+ */
 
-int leerNumero();
-int elegirOpciones();
+float leerNumero();
+
+/** \brief leer un numero ingresado de opciones del menu valida que sea entre minimo y maximo
+ *
+ * \param minimo valor entero
+ * \param maximo valor entero
+ * \return un entero comprendido entre el minimo valor y el maximo valor
+ *
+ */
+
+int elegirOpciones(int min, int max);
 
 
 int main()
 {
     char seguir='s';
     int opcion=0;
-    int numeroUno;
-    int numeroDos;
-    int resultado;
+    float numeroUno;
+    float numeroDos;
+    float resultado;
+    int flag1 = 0;
+    int flag2 = 0;
+    double resultadofactorizar;
+
+
+
+
 
     while(seguir=='s')
     {
-        printf("1- Ingresar 1er operando (A=x)\n");
-        printf("2- Ingresar 2do operando (B=y)\n");
+
+        if (flag1 == 1)
+        {
+            printf("1- Ingresar 1er operando (A=%f)\n", numeroUno);
+
+        }
+        else
+        {
+            printf("1- Ingresar 1er operando (A=X)\n");
+        }
+
+         if (flag2 == 1)
+        {
+            printf("2- Ingresar 2do operando (B=%f)\n", numeroDos);
+        }
+        else
+        {
+            printf("2- Ingresar 2do operando (B=Y\n");
+        }
+
         printf("3- Calcular la suma (A+B)\n");
         printf("4- Calcular la resta (A-B)\n");
         printf("5- Calcular la division (A/B)\n");
@@ -55,7 +94,7 @@ int main()
         printf("8- Calcular todas las operacione\n");
         printf("9- Salir\n");
 
-        opcion = elegirOpciones();
+        opcion = elegirOpciones(1, 9);
 
 
 
@@ -63,52 +102,84 @@ int main()
         {
             case 1:
 
-                printf("Ingresar 1er operando (A=x):\n");
+                printf("Ingresar 1er operando:\n");
                 numeroUno = leerNumero();
-                opcion = elegirOpciones();
+                flag1 = 1;
+                continue;
+
 
             case 2:
-                printf("Ingresar 2do operando (B=y):\n");
+                printf("Ingresar 2do operando:\n");
                 numeroDos = leerNumero();
-                opcion = elegirOpciones();
-                /* */
-
-
+                flag2 = 1;
+                continue;
 
 
             case 3:
 
-                printf("La suma (A+B): %d y %d", numeroUno, numeroDos);
+                printf("La suma (A+B): %f y %f", numeroUno, numeroDos);
                 resultado = sumar(numeroUno, numeroDos);
-                printf("\nResultado %d ", resultado);
-                opcion = elegirOpciones();
+                printf("\nResultado %f\n", resultado);
+                continue;
 
 
 
             case 4:
                 printf("La resta (A-B):\n");
                 resultado = restar(numeroUno, numeroDos);
-                printf("\nResultado %d ", resultado);
-                break;
+                printf("\nResultado %f\n", resultado);
+                continue;
+
             case 5:
                 printf("La division (A/B):\n");
+                 while (numeroDos == 0)
+                    {
+                        printf("Elegir denominador distinto de cero\n");
+                        scanf("%f", &numeroDos);
+                    }
+
                 resultado = dividir(numeroUno, numeroDos);
-                printf("\nResultado %d ", resultado);
-                break;
+                printf("\nResultado %f\n", resultado);
+                continue;
             case 6:
-                 printf("La multiplicacion (A*B)\n");
-                  resultado = multiplicar(numeroUno, numeroDos);
-                  printf("\nResultado %d ", resultado);
-                break;
+                printf("La multiplicacion (A*B)\n");
+                resultado = multiplicar(numeroUno, numeroDos);
+                printf("\nResultado %f\n", resultado);
+                continue;
             case 7:
                 printf("El factorial (A!):\n");
-                resultado = factorizar(numeroUno);
-                printf("\nResultado %d ", resultado);
-                break;
-            case 8:
-                printf("Calcular todas las operacione\n");
+                resultadofactorizar = factorizar((int)numeroUno);
+                printf("\nResultado %d %e\n", (int)numeroUno, resultadofactorizar);
+                continue;
 
-                break;
+            case 8:
+                printf("Calcular todas las operaciones\n");
+
+                resultado = sumar(numeroUno, numeroDos);
+
+                printf("\nRESULTADOS:\nSuma (A+B): %f", resultado);
+                resultado = restar(numeroUno, numeroDos);
+
+                printf("\nResta (A-B): %f", resultado);
+
+                if (numeroDos < 0)
+                {
+                    printf("\n No es posible realizar esta operación");
+                }
+
+                else {
+                resultado = dividir(numeroUno, numeroDos);
+                printf("\nDivision (A/B): %f", resultado);
+
+                }
+                resultado = multiplicar(numeroUno, numeroDos);
+                printf("\nMultiplicacion (A*B): %f", resultado);
+
+                resultadofactorizar = factorizar((int)numeroUno);
+                printf("\nFactorizacion (A!): %e", resultadofactorizar);
+
+
+                continue;
 
             case 9:
                 printf("Salir\n");
@@ -122,29 +193,30 @@ int main()
 
     }
 
+}
 
-int leerNumero()
+
+float leerNumero()
 {
-    int numero;
+    float numero;
 
-    scanf("%d", &numero);
-    while (numero == 0)
-    {
-        scanf("%d", &numero);
-    }
+    scanf("%f", &numero);
 
     return numero;
 }
 
-int elegirOpciones()
+int elegirOpciones(int min, int max)
 {
         int opcion;
+
         printf("Elegir opcion del 1 al 9\n");
+
         scanf("%d",&opcion);
 
-        while (opcion<=0 || opcion>9)
+        while (opcion<min || opcion>max)
         {
-           printf("Elegir opcion Válida (del 1 al 9)\n");
+           printf("Elegir opcion Válida (del %d al %d)\n", min, max);
+
            scanf("%d",&opcion);
         }
 
