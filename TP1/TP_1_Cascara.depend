@@ -10,3 +10,14 @@
 	"funciones.h"
 	<conio.h>
 
+1522756624 source:c:\test\mercedesbigi\clases_prog\tp1\funciones.c
+	"funciones.h"
+
+1522756624 c:\test\mercedesbigi\clases_prog\tp1\funciones.h
+
+1522756624 source:c:\test\mercedesbigi\clases_prog\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+	<conio.h>
+

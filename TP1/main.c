@@ -105,14 +105,13 @@ int main()
                 printf("Ingresar 1er operando:\n");
                 numeroUno = leerNumero();
                 flag1 = 1;
-                continue;
-
+                break;
 
             case 2:
                 printf("Ingresar 2do operando:\n");
                 numeroDos = leerNumero();
                 flag2 = 1;
-                continue;
+                break;
 
 
             case 3:
@@ -120,7 +119,7 @@ int main()
                 printf("La suma (A+B): %f y %f", numeroUno, numeroDos);
                 resultado = sumar(numeroUno, numeroDos);
                 printf("\nResultado %f\n", resultado);
-                continue;
+                break;
 
 
 
@@ -128,7 +127,7 @@ int main()
                 printf("La resta (A-B):\n");
                 resultado = restar(numeroUno, numeroDos);
                 printf("\nResultado %f\n", resultado);
-                continue;
+                break;
 
             case 5:
                 printf("La division (A/B):\n");
@@ -140,17 +139,17 @@ int main()
 
                 resultado = dividir(numeroUno, numeroDos);
                 printf("\nResultado %f\n", resultado);
-                continue;
+                break;
             case 6:
                 printf("La multiplicacion (A*B)\n");
                 resultado = multiplicar(numeroUno, numeroDos);
                 printf("\nResultado %f\n", resultado);
-                continue;
+                break;
             case 7:
                 printf("El factorial (A!):\n");
                 resultadofactorizar = factorizar((int)numeroUno);
                 printf("\nResultado %d %e\n", (int)numeroUno, resultadofactorizar);
-                continue;
+                break;
 
             case 8:
                 printf("Calcular todas las operaciones\n");
@@ -179,7 +178,7 @@ int main()
                 printf("\nFactorizacion (A!): %e", resultadofactorizar);
 
 
-                continue;
+                break;
 
             case 9:
                 printf("Salir\n");
@@ -188,10 +187,12 @@ int main()
         }
 
 
-    return 0;
+
 
 
     }
+
+     return 0;
 
 }
 
