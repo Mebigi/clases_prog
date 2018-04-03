@@ -53,12 +53,13 @@ int main()
 {
     char seguir='s';
     int opcion=0;
-    float numeroUno;
-    float numeroDos;
+    float numeroUno=0;
+    float numeroDos=0;
     float resultado;
     int flag1 = 0;
     int flag2 = 0;
     double resultadofactorizar;
+    int prueba;
 
 
 
@@ -66,7 +67,7 @@ int main()
 
     while(seguir=='s')
     {
-
+        printf("\nCALCULADORA\n");
         if (flag1 == 1)
         {
             printf("1- Ingresar 1er operando (A=%f)\n", numeroUno);
@@ -77,14 +78,15 @@ int main()
             printf("1- Ingresar 1er operando (A=X)\n");
         }
 
-         if (flag2 == 1)
+        if (flag2 == 1)
         {
             printf("2- Ingresar 2do operando (B=%f)\n", numeroDos);
         }
         else
         {
-            printf("2- Ingresar 2do operando (B=Y\n");
+            printf("2- Ingresar 2do operando (B=Y)\n");
         }
+
 
         printf("3- Calcular la suma (A+B)\n");
         printf("4- Calcular la resta (A-B)\n");
@@ -92,7 +94,7 @@ int main()
         printf("6- Calcular la multiplicacion (A*B)\n");
         printf("7- Calcular el factorial (A!)\n");
         printf("8- Calcular todas las operacione\n");
-        printf("9- Salir\n");
+        printf("9- Salir\n\n");
 
         opcion = elegirOpciones(1, 9);
 
@@ -100,99 +102,119 @@ int main()
 
         switch(opcion)
         {
-            case 1:
+        case 1:
 
-                printf("Ingresar 1er operando:\n");
-                numeroUno = leerNumero();
-                flag1 = 1;
-                break;
+            printf("\nIngresar 1er operando: ");
+            numeroUno = leerNumero();
+            flag1 = 1;
+            break;
 
-            case 2:
-                printf("Ingresar 2do operando:\n");
-                numeroDos = leerNumero();
+        case 2:
+            printf("\nIngresar 2do operando: ");
+            numeroDos = leerNumero();
+            flag2 = 1;
+            break;
+
+
+        case 3:
+
+
+            resultado = sumar(numeroUno, numeroDos);
+            printf("---------------------------------------------------\n");
+            printf("%f + %f= %f\n", numeroUno, numeroDos, resultado);
+            printf("---------------------------------------------------\n");
+            break;
+
+
+
+        case 4:
+
+            resultado = restar(numeroUno, numeroDos);
+
+            printf("---------------------------------------------------\n");
+            printf("%f - %f= %f\n", numeroUno, numeroDos, resultado);
+            printf("---------------------------------------------------\n");
+            break;
+
+        case 5:
+
+            while (numeroDos == 0 || flag2 == 0)
+            {
+                printf("Elegir denominador distinto de cero\n");
+                scanf("%f", &numeroDos);
                 flag2 = 1;
-                break;
+            }
 
+            resultado = dividir(numeroUno, numeroDos);
 
-            case 3:
+            printf("---------------------------------------------------\n");
+            printf("%f / %f= %f\n", numeroUno, numeroDos, resultado);
+            printf("---------------------------------------------------\n");
+            break;
 
-                printf("La suma (A+B): %f y %f", numeroUno, numeroDos);
-                resultado = sumar(numeroUno, numeroDos);
-                printf("\nResultado %f\n", resultado);
-                break;
+        case 6:
 
+            resultado = multiplicar(numeroUno, numeroDos);
+            printf("---------------------------------------------------\n");
+            printf("%f * %f= %f\n", numeroUno, numeroDos, resultado);
+            printf("---------------------------------------------------\n");
+            break;
+        case 7:
 
+            resultadofactorizar = factorizar((int)numeroUno);
+            printf("---------------------------------------------------\n");
+            printf("(%d!)= %e\n", (int)numeroUno, resultadofactorizar);
+            printf("---------------------------------------------------\n");
+            break;
 
-            case 4:
-                printf("La resta (A-B):\n");
-                resultado = restar(numeroUno, numeroDos);
-                printf("\nResultado %f\n", resultado);
-                break;
+        case 8:
+            printf("Calcular todas las operaciones\n");
 
-            case 5:
-                printf("La division (A/B):\n");
-                 while (numeroDos == 0)
-                    {
-                        printf("Elegir denominador distinto de cero\n");
-                        scanf("%f", &numeroDos);
-                    }
+            resultado = sumar(numeroUno, numeroDos);
 
-                resultado = dividir(numeroUno, numeroDos);
-                printf("\nResultado %f\n", resultado);
-                break;
-            case 6:
-                printf("La multiplicacion (A*B)\n");
-                resultado = multiplicar(numeroUno, numeroDos);
-                printf("\nResultado %f\n", resultado);
-                break;
-            case 7:
-                printf("El factorial (A!):\n");
-                resultadofactorizar = factorizar((int)numeroUno);
-                printf("\nResultado %d %e\n", (int)numeroUno, resultadofactorizar);
-                break;
+            printf("\nRESULTADOS:\nSuma (A+B): %f", resultado);
+            resultado = restar(numeroUno, numeroDos);
 
-            case 8:
-                printf("Calcular todas las operaciones\n");
+            printf("\nResta (A-B): %f", resultado);
 
-                resultado = sumar(numeroUno, numeroDos);
+            if (numeroDos < 0)
+            {
+                printf("\n No es posible realizar esta operación");
+            }
 
-                printf("\nRESULTADOS:\nSuma (A+B): %f", resultado);
-                resultado = restar(numeroUno, numeroDos);
-
-                printf("\nResta (A-B): %f", resultado);
-
-                if (numeroDos < 0)
-                {
-                    printf("\n No es posible realizar esta operación");
-                }
-
-                else {
+            else
+            {
                 resultado = dividir(numeroUno, numeroDos);
                 printf("\nDivision (A/B): %f", resultado);
 
-                }
-                resultado = multiplicar(numeroUno, numeroDos);
-                printf("\nMultiplicacion (A*B): %f", resultado);
+            }
+            resultado = multiplicar(numeroUno, numeroDos);
+            printf("\nMultiplicacion (A*B): %f", resultado);
 
-                resultadofactorizar = factorizar((int)numeroUno);
-                printf("\nFactorizacion (A!): %e", resultadofactorizar);
+            resultadofactorizar = factorizar((int)numeroUno);
+            printf("\nFactorizacion (A!): %G", resultadofactorizar);
 
 
-                break;
+            break;
 
-            case 9:
-                printf("Salir\n");
-                seguir = 'n';
-                break;
+        case 9:
+            printf("Salir\n");
+            seguir = 'n';
+            break;
         }
 
 
 
+    printf("\n");
+    system("pause");
+    system("cls");
 
 
     }
 
-     return 0;
+
+
+    return 0;
 
 }
 
@@ -208,20 +230,20 @@ float leerNumero()
 
 int elegirOpciones(int min, int max)
 {
-        int opcion;
+    int opcion;
 
-        printf("Elegir opcion del 1 al 9\n");
+    printf("Elegir opcion del 1 al 9\nOpcion:");
+
+    scanf("%d",&opcion);
+
+    while (opcion<min || opcion>max)
+    {
+        printf("Elegir opcion Valida (del %d al %d)\n", min, max);
 
         scanf("%d",&opcion);
+    }
 
-        while (opcion<min || opcion>max)
-        {
-           printf("Elegir opcion Válida (del %d al %d)\n", min, max);
-
-           scanf("%d",&opcion);
-        }
-
-        return opcion;
+    return opcion;
 }
 
 
