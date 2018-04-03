@@ -4,6 +4,8 @@
 
 float calcularPromedio(int, int);
 
+void mostrarVector(int [], int); // paso el vector y tamaño del vector
+
 int main()
 {
     int vector[TAM] = {1,24,3,301,5}; // {0}
@@ -38,7 +40,8 @@ int main()
         printf("5- listado Maximo\n");
         printf("6- listado mayores 20\n");
         printf("7- promedio\n");
-        printf("8- listado Salir\n");
+        printf("8- Buscar Numero\n");
+        printf("9- listado Salir\n");
 
         printf("ingrese una opcion:\n");
         scanf("%d", &opcion);
@@ -74,11 +77,13 @@ int main()
 
         case 2:
             //mostrar datos
-            for (i=0; i<TAM; i++)
+            /*for (i=0; i<TAM; i++)
             {
 
                 printf("%d\n", vector[i]);
-            }
+            }*/
+            mostrarVector(vector, TAM);
+
             break;
         case 3:
             //listado reverso
@@ -87,6 +92,7 @@ int main()
             {
                 printf("%d\n", vector[i]);
             }
+
             break;
         case 4:
             //pares
@@ -159,10 +165,26 @@ int main()
            printf("Promedio: %f\n", promedio);
 
         case 8:
+
+            printf("Ingrese numero abuscar\n");
+            scanf("%d", &numero);
+
+             for(i=0; i<TAM; i++)
+
+            {
+                if(vector[i] == numero)
+                {
+                    printf("la posicion %d\n", i+1);
+                }
+            }
+
+        case 9:
             //salir
             printf("Salir\n");
             seguir = 'n';
             break;
+
+
 
 
 
@@ -228,4 +250,16 @@ float calcularPromedio(int suma, int cantidad)
 
 
     return promedio;
+}
+
+void mostrarVector(int vector[], int tamanio)
+{
+    int i;
+    for(i=0; i<tamanio; i++)
+    {
+        if(vector[i]!=0)
+            {
+                    printf("%d\n", vector[i]);
+            }
+    }
 }
