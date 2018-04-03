@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1522764301 source:c:\test\mercedesbigi\clases_prog\clase5\main.c
+	<stdio.h>
+	<stdlib.h>
+
