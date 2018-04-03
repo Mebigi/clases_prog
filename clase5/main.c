@@ -6,7 +6,7 @@ float calcularPromedio(int, int);
 
 int main()
 {
-    int vector[TAM];
+    int vector[TAM] = {1,24,3,301,5}; // {0}
     int i;
     int maximo;
     int flag = 0;
@@ -18,14 +18,15 @@ int main()
     int posicion;
     int numero;
     char seguiri;
+    int cantidad = 0;
 
     /*inicinializar*/
 
-    for(i=0; i<TAM; i++)
+    /*for(i=0; i<TAM; i++)
     {
         vector[i]=0; //el cero como valor ilogico
     }
-
+    */
 
     while(seguir=='s')
     {
@@ -137,16 +138,24 @@ int main()
                 }
 
             }
+            printf("Mayores a 20: %d\n", cont20);
+
             break;
         case 7: //proemdio de los valores
 
             for(i=0; i>TAM; i++)
             {
-                suma = suma + vector[i];
+
+                if (vector[i]!=0)
+                {
+                    suma = suma + vector[i];
+                    cantidad++;
+                }
+
 
             }
 
-           float promedio=calcularPromedio(suma, TAM);
+           promedio=calcularPromedio(suma, cantidad);
            printf("Promedio: %f\n", promedio);
 
         case 8:
