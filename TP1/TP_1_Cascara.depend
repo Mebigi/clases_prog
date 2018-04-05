@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1522782476 source:c:\1ercuatrimestretecnicatura\clases_prog\tp1\funciones.c
+1522865083 source:c:\1ercuatrimestretecnicatura\clases_prog\tp1\funciones.c
 	"funciones.h"
 
-1522782465 c:\1ercuatrimestretecnicatura\clases_prog\tp1\funciones.h
+1522865083 c:\1ercuatrimestretecnicatura\clases_prog\tp1\funciones.h
 
-1522782339 source:c:\1ercuatrimestretecnicatura\clases_prog\tp1\main.c
+1522965776 source:c:\1ercuatrimestretecnicatura\clases_prog\tp1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"funciones.h"
