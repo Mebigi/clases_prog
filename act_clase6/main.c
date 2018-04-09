@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string.h> // funciones para manipular cadena de caracteres stre
 #include <ctype.h>
 
 
@@ -17,6 +17,8 @@ int main()
     char nombre[50];
     char apellido[50];
     char nombreyapellido[120];
+    int len;
+    int len2;
 
     //m a r i a  d e  l a  s     m  e  r  c  e  d  e  s  /0 b  i  g  i /0
     //0 1 2 3 45 6 78 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
@@ -24,25 +26,6 @@ int main()
     printf("Ingrese Nombre\n");
     gets(nombre);
 
-    for(i=0; i<50-1; i++)//negra tiene cantidad de elementos menos 1 para que no desborde.
-    {
-        if (i==0)
-        {
-            strlwr(nombre[i]);
-        }
-        else {
-
-            strlwr(nombre[i]);
-
-        }
-        strlwr(nombre[i]); // depende si ordeno de menor a mayor pongo mayor
-            {
-                aux = vector[i];
-                vector[i]=vector[j];
-                vector[j]= aux;
-            }
-        }
-    }
 
 
 
@@ -50,30 +33,50 @@ int main()
     gets(apellido);
 
 
-
-
-    printf(" El nombre es %s, %s", nombre, apellido);
-
-
     strcat(nombreyapellido, nombre);
 
-
-
-
-    strlwr(nombreyapellido);
-
-
-
-
-    strcat(nombreyapellido, ",");
+    strcat(nombreyapellido, ", ");
 
     strcat(nombreyapellido, apellido);
 
-    strlwr(nombreyapellido);
+
+     printf(" %s\n", nombreyapellido);
 
 
 
-    puts(nombreyapellido);
+
+    len= 200;
+    len2 = (strlen(nombreyapellido));
+    printf("len %d\n", len);
+    printf("len2 %d\n", len2);
+
+
+    for (int i=0; i<len2; i++)
+     {
+
+    if (nombreyapellido[i] != '\0')
+    {
+        if (i < len2 && i > 0)
+       {
+            nombreyapellido[i] = tolower(nombre[i]);
+       }
+        if (i == 0)
+       {
+            nombreyapellido[i] = toupper(nombre[i]);
+       }
+
+    } else
+    {
+        nombreyapellido[i] = ' ';
+
+    }
+
+
+
+
+     }
+
+      puts(nombreyapellido);
 
 
 
