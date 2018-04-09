@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1523305563 source:c:\1ercuatrimestretecnicatura\clases_prog\act_clase6\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
