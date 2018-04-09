@@ -4,11 +4,11 @@
 
 float calcularPromedio(int, int);
 
-void mostrarVector(int [], int); // paso el vector y tamaño del vector
+void mostrarVector(int [], int); // paso el vector por valor no por referencia (es una copia del dato) y tamaño del vector// cuando paso algo por referncia estoy pasando la direcion de memoria y no la copia)
 
 int main()
 {
-    int vector[TAM] = {1,24,3,301,5}; // {0}
+    int vector[TAM] = {1,24,3,301,5}; // {0} //
     int i;
     int maximo;
     int flag = 0;
@@ -152,7 +152,8 @@ int main()
             for(i=0; i>TAM; i++)
             {
 
-                if (vector[i]!=0)
+                if (vector[i]!=0) // solo mostrar los datos distintos de cero, el vector no muestra los ceros.
+                    //Cuando trabajamos con datos de numeros reales ahi tene necesito trabajar con un vector estado.
                 {
                     suma = suma + vector[i];
                     cantidad++;
