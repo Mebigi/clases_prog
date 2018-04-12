@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define TAM 5
 
 int buscarLibre(int [], int);
 float calcularPromedio(int, int);
 void mostrarAlumos(int[], char[][20], int[], int[], float[], int); // MATRIZ PASAR LAS CANTIDAD DE COLUMAS
 int cargarAlumno(int[], char[][20], int[], int[], float[], int);
+int modificarAlumo(int [], int, int);
+int BuscarAlumo(int [], int, int);
 
 
 
@@ -25,18 +28,22 @@ int main()
     son paralelos porque tenemos correspondecias del mismo subindice de todos los vectores.
     para los str las filas se correponde en este caso. cada columna un caracter */
 
-    int legajo[TAM]= {0};
-    char nombre[TAM][20];
-    int nota1[TAM];
-    int nota2[TAM];
-    float promedio[TAM];
+    int legajo[TAM]= {10,11,14};
+    char nombre[TAM][20] = {"Maria", "Mercedes", "Valeria"};
+    int nota1[TAM] = {10,8,9};
+    int nota2[TAM]= {7,6,9};
+    float promedio[TAM] = {8.5, 7, 9};
     int opcion;
     int index;
+    int modificar;
+    int dato;
+    int posicion;
+    int len;
 
 
     do
     {
-        printf("1. ALTAS\n2. MOSTRAR\n3. Modificar\n4. Baja(modificacion)\n9. SALIR\nElija una opcion: ");
+        printf("1. ALTAS\n2. MOSTRAR\n3. Modificar\n4. Baja\n9. SALIR\nElija una opcion: ");
         scanf("%d", &opcion);
 
         switch(opcion)
@@ -45,7 +52,7 @@ int main()
             index= cargarAlumno(legajo, nombre, nota1, nota2, promedio, TAM);
             if(index == -1)
             {
-                printf("no hay lugar!!!\n");
+            printf("no hay lugar!!!\n");
             }else
             {
              printf("Se ingreso el alumno\n");
@@ -58,7 +65,82 @@ int main()
         break;
 
 
+        case 3:
+        //Buscar alumno por nro de legajo
+        printf("Buscar alumno por Legajo:\n");
+        scanf("%d", &dato);
+
+        posicion = BuscarAlumo(legajo, dato, TAM);
+
+        while(posicion == -1)
+        {
+            printf("Legajo no encontrado, reingresar:\n");
+            fflush(stdin);
+            scanf("%d", &dato);
+            posicion = BuscarAlumo(legajo, dato, TAM);
+
         }
+
+        printf("Modificar:\n1-legajo\n2-Nombre(no disp)\n3-Nota1\n4-Nota2\nElija campo a modificar: ");
+        scanf("%d", &modificar);
+
+        //campo a modificar
+         switch(modificar)
+         {
+              case 1:
+                //legajo
+                printf("Modificar legajo de\n: ");
+                scanf("%d", &legajo[posicion]);
+                break;
+            case 2:
+               // nombre
+                printf("Modificar nombre de\n: ");
+                fflush(stdin);
+                gets(nombre[posicion]);
+                break;
+            case 3:
+                //Nota1
+                printf("Modificar Nota 1 de\n: ");
+                scanf("%d", &nota1[posicion]);
+                promedio[posicion] = calcularPromedio(nota1[posicion], nota2[posicion]);
+                break;
+
+            case 4:
+                //Nota2
+                printf("Modificar Nota 2 de\n: ");
+                scanf("%d", &nota2[posicion]);
+                promedio[posicion] = calcularPromedio(nota1[posicion], nota2[posicion]);
+                break;
+
+
+         }
+           break;
+
+
+            case 4:
+                //baja
+                //Buscar alumno por nro de legajo
+                printf("Buscar alumno por Legajo");
+                scanf("%d", &dato);
+
+                posicion = BuscarAlumo(legajo, dato, TAM);
+
+                legajo[posicion] = 0;
+                len = strlen(nombre[posicion]);
+                for (int i=0; i<len; i++)
+                {
+                    nombre[posicion][i] = 0;
+                }
+                nota1[posicion] = 0;
+                nota2[posicion] = 0;
+                promedio[posicion] = 0;
+                break;
+        }
+
+
+    printf("\n\n");
+    system("pause");
+    system("cls");
 
     }
     while(opcion!=9);
@@ -147,5 +229,42 @@ int cargarAlumno(int legajo[], char nombre[][20], int nota1[], int nota2[], floa
 
 }
 
+int BuscarAlumo(int vector[], int dato, int tam)
+{
+     int i;
+     int posicion = -1;
+
+     for(i=0; i<tam; i++)
+            {
+                if(vector[i] == dato)
+                {
+
+                   posicion = i;
+
+                }
+
+            }
+
+            return posicion;
+}
+
+int modificarAlumo(int vector[], int dato, int tam)
+{
+     int i;
+
+     for(i=0; i<tam; i++)
+            {
+                if(vector[i] == dato)
+                {
+
+                    printf("Ingresar nuevo dato: ");
+                    fflush(stdin);
+                    scanf("%d", &vector[i]);
+                    break;
+                }
+            }
+
+            return vector[i];
+}
 
 
