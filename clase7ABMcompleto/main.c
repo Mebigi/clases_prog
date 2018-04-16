@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-#define TAM 5
+#define TAM 3
 
 int buscarLibre(int[],int);
 float calcularPromedio(int,int);
@@ -10,11 +10,17 @@ int buscarLegajo(int[],int,int);
 
 int main(void)
 {
-    int legajo[TAM]={}; // Inicializa todas las posiciones en 0.
-    char nombre[TAM][21];
-    int nota1[TAM];
-    int nota2[TAM];
-    float promedio[TAM];
+
+    int legajo[TAM]= {10,11,14};
+    char nombre[TAM][20] = {"Valeria", "Mercedes", "Carina"};
+    int nota1[TAM] = {10,8,9};
+    int nota2[TAM]= {7,6,9};
+    float promedio[TAM] = {8.5, 7, 9};
+    //int legajo[TAM]={}; // Inicializa todas las posiciones en 0.
+    //char nombre[TAM][21];
+    //int nota1[TAM];
+    //int nota2[TAM];
+    //float promedio[TAM];
     int opcion;
     int index;
     int leg;
@@ -100,9 +106,9 @@ int main(void)
                 getche();
                 break;
             case 5:
-                for(int i=0;i<TAM;i++){
-                    for(int j=0;j<TAM;j++){
-                        if(strcmp(nombre[j],nombre[i])>0){
+                for(int i=0;i<TAM-1;i++){
+                    for(int j=i+1;j<TAM;j++){
+                        if(strcmp(nombre[j],nombre[i])<0){
                             int auxlegajo;
                             auxlegajo=legajo[i];
                             legajo[i]=legajo[j];
