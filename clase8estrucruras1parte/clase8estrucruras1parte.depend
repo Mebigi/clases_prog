@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1523908306 source:c:\1ercuatrimestretecnicatura\clases_prog\clase8estrucruras1parte\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
