@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1523986814 source:c:\1ercuatrimestretecnicatura\clases_prog\clase9geflix\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
