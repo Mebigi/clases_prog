@@ -68,6 +68,8 @@ int main()
 
      //Hardcodeo
 
+     //eAlumno listadoDeAlumnos[3]= {{}, {}};
+
     fflush(stdin);
     listadoDeAlumnos[1].legajo = 2;
     strcpy(listadoDeAlumnos[1].nombre, "daniela");
