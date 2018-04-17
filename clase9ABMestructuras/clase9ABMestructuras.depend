@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1523969828 source:c:\test\mercedesbigi\clases_prog\clase9abmestructuras\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
