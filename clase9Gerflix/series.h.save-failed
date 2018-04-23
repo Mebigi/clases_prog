@@ -1,0 +1,22 @@
+#ifndef SERIES_H_INCLUDED
+#define FUNCIONES_H_INCLUDED
+
+
+typedef struct
+{
+int idSerie;
+char nombre[LONG];
+int canttemporadas;
+int aniolanzamiento;
+int estado;
+} eSerie;
+
+
+void menuSerie(eSerie [], int);
+int buscarLibre(eSerie [],int);
+int buscarSerie(eSerie [],int, int);
+void cargarDatosHardCode(eSerie []);
+
+
+
+#endif // FUNCIONES_H_INCLUDED

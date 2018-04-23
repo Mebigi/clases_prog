@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1524449875 source:c:\programacion1cuatri\clases_prog\clase9gerflix\main.c
+	"usuarios.h"
+	"series.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1524449105 c:\programacion1cuatri\clases_prog\clase9gerflix\usuarios.h
+	"series.h"
+
+1524450116 c:\programacion1cuatri\clases_prog\clase9gerflix\series.h
+
+1524449540 source:c:\programacion1cuatri\clases_prog\clase9gerflix\series.c
+	"usuarios.h"
+	"series.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1524449980 source:c:\programacion1cuatri\clases_prog\clase9gerflix\usuarios.c
+	"usuarios.h"
+	"series.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
