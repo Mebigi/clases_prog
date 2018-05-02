@@ -5,7 +5,7 @@ int factorial(int numero);
 
 int main()
 {
-    int numero = 5;
+    int numero = 1;
 
     numero = factorial(numero);
 
