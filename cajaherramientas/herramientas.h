@@ -1,5 +1,5 @@
-#ifndef FUNCIONES_H_INCLUDED
-#define FUNCIONES_H_INCLUDED
+#ifndef HERRAMIENTAS_H_INCLUDED
+#define HERRAMIENTAS_H_INCLUDED
 
 
 typedef struct {
@@ -15,12 +15,16 @@ typedef struct {
 typedef struct {
 
     long int codigo;
-	char producto[50];
-	char marca[50];
+    char producto[50];
+    char marca[50];
     unsigned int cantidad;
     int estado;
 
 }EProducto;
+
+
+
+
 
 /** \brief Suma dos numeros flotantes
  *
@@ -82,7 +86,7 @@ long long int factorizar(int numero);
   */
 
 
-float IngresarFlotante(float, float);
+float IngresarFlotante(char [], int , int);
 
  /** \brief valida numero flotante entre un minimo y un maximo
   *
@@ -92,7 +96,7 @@ float IngresarFlotante(float, float);
   *
   */
 
-float validarFlotante( float, float, float);
+float validarFlotante(char [], int , int , int);
 
 /** \brief leer un numero entero ingresado comprendido entre el minimo valor y el maximo valor
  * \param minimo valor
@@ -157,7 +161,7 @@ void cargarDatosHardCodePersona(EPersona lista[]);
  * @return
  */
 
-void cargarDatosHardCodeProductos(EProductos lista[])
+void cargarDatosHardCodeProductos(EProducto lista[]);
 
 
 /**
@@ -178,7 +182,7 @@ int buscarPorDni(EPersona [], int, long int);
 /**
  * Carga los datos de personas en lista (Array) cuyo tipo de dato es una estrctura EPersona que posee las variables char nombre, int edad y long int dni.
  * @param lista el array se pasa como parametro.
- * @param tamaÃ±o del array.
+ * @param tamaño del array.
 
  */
 
@@ -187,7 +191,7 @@ void cargarPersona(EPersona [], int);
 /**
  * Ordena por nombre los datos de personas en lista (Array) cuyo tipo de dato es una estrctura EPersona que posee las variables char nombre, int edad y long int dni.
  * @param lista el array se pasa como parametro.
- * @param tamaÃ±o del array.
+ * @param tamaño del array.
 
  */
 
@@ -197,7 +201,7 @@ void ordenarListadoPersonas (EPersona [], int );
 /**
  * Imprime en consola por nombre los datos de personas en lista (Array) cuyo tipo de dato es una estrctura EPersona que posee las variables char nombre, int edad y long int dni.
  * @param lista el array se pasa como parametro.
- * @param tamaÃ±o del array.
+ * @param tamaño del array.
 
  */
 
@@ -206,8 +210,8 @@ void imprimirListadoPersonas (EPersona [], int );
 /**
  * Grafica en consola por nombre los datos de personas en lista (Array) cuyo tipo de dato es una estrctura EPersona
  * El el Eje Y el numero de personas que
- * En el eje Y se marcarÃ¡n la cantidad de personas en el grupo, y en el eje X el grupo dividido por edad en columnas <18 19-35 >35
- * @param tamaÃ±o del array.
+ * En el eje Y se marcarán la cantidad de personas en el grupo, y en el eje X el grupo dividido por edad en columnas <18 19-35 >35
+ * @param tamaño del array.
 
  */
 
@@ -219,16 +223,9 @@ long int IngresarLongInt(int, int);
 long int esNumerolong(char [], int);
 
 
+#endif // FUNCIONES
 
 
 
 
 
-
-
-
-
-
-
-
-#endif // FUNCIONES_H_INCLUDED

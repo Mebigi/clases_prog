@@ -1,35 +1,126 @@
 #include "herramientas.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 
 //INGRESO Y VALIDAR DATOS INGRESADOS
 
-float IngresarFlotante(float min, float max)
+float IngresarFlotante(char mensaje[], int min, int max)
 {
+    char datoflot[14];
     float numero;
 
-    scanf("%f", &numero);
-    numero = validarFlotante(numero, min, max);
+    printf("%s:\n", mensaje, min, max);
+    gets(datoflot);
+
+    numero = validarFlotante(datoflot, min, max, 14);
 
     return numero;
 }
 
 
-float validarFlotante(float datoflot, float min, float max)
+float validarFlotante(char datoflot[], int min, int max, int tam)
 {
-    while(datoflot < min || datoflot > max)
+    float numeroflotante=0;
+    int puntos=0;
+    int esflotante=0;
+    int contadordecimales=0;
+    int cifraentero=0;
+    int negativos=0;
+
+    int len;
+    len = strlen(datoflot);
+
+    do
     {
+        for (int i=0; i<len; i++)
+        {
+            if(!(isdigit(datoflot[i])))
+            {
+                if((datoflot[0] == '-') && negativos < 1)
+                {
+                    negativos++;
+                }
 
-        fflush(stdin);
-        printf("Dato no v%clido reingresar (valores entre %.f y %.f):\n", 160, min, max);
-        scanf("%f", &datoflot);
+                else if((datoflot[i] == '.') && puntos < 1)
+                {
+                    puntos++;
+
+                    cifraentero=i;
+
+                    if (cifraentero>7)
+                    {
+                        esflotante=0;
+                        printf("Ha superado la el tamano del entero permitido\n");
+                        break;
+
+                    }
+
+                }
+                else
+                {
+                    esflotante=0;
+                    break;
+                }
+            }
+
+            else
+            {
+                esflotante=1;
+
+            }
 
 
-    }
 
-    return datoflot;
+        if(puntos == 1)
+            {
+                contadordecimales++;
+
+                if(contadordecimales>6 || contadordecimales < 1 )
+                {
+                    esflotante=0;
+                    printf("Error en cantidad de los decimales\n");
+                    break;
+
+                }
+            }
+
+        }
+
+        if(esflotante==0)
+        {
+            printf("Dato no v%clido reingresar:\n", 160, min, max);
+            gets(datoflot);
+            len = strlen(datoflot);
+            puntos=0;
+            negativos=0;
+            contadordecimales=0;
+
+        }
+
+        if ( len < min || len > max)
+        {
+            printf("Largo no v%clido reingresar:\n", 160, min, max);
+            gets(datoflot);
+            len = strlen(datoflot);
+            puntos=0;
+            negativos=0;
+            contadordecimales=0;
+
+        }
+
+    }while(esflotante ==0);
+
+    numeroflotante = atof(datoflot);
+
+    return numeroflotante;
+
 }
+
+
+
 
 
 int IngresarEntero(int min, int max)
@@ -48,7 +139,7 @@ int IngresarEntero(int min, int max)
 
 int validarEntero (int dato, int min, int max)
 {
-    while(dato < min || dato > max)
+    while((dato < min || dato > max) && !(isdigit(dato)))
     {
 
         fflush(stdin);
@@ -189,7 +280,7 @@ void cargarDatosHardCodePersona(EPersona lista[])
 }
 
 
-void cargarDatosHardCodeProductos(EProductos lista[])
+void cargarDatosHardCodeProductos(EProducto lista[])
 {
 
 
@@ -265,7 +356,7 @@ void cargarPersona(EPersona lista[], int index)
 
         fflush(stdin);
     printf("\nIngrese Edad: ");
-    lista[index].edad=IngresarLongEntero(1,150); // segun Google 146 a√±os el hombre mas viejo
+    lista[index].edad=IngresarLongEntero(1,150); // segun Google 146 aÒos el hombre mas viejo
 
 
 
@@ -446,7 +537,7 @@ void GraficoListadoPersonas (EPersona lista[], int tam )
     }
     printf("  __|_________________________\n");
     printf("     <18   19-35    >35\n\n");
-    printf("Gr√°fico para una estad√≠stica de %d personas con edad menor a 18, %d personas con edades entre 19 y 35, y %d personas con edades mayores a 35.\n", w,k,j);
+    printf("Gr·fico para una estadÌstica de %d personas con edad menor a 18, %d personas con edades entre 19 y 35, y %d personas con edades mayores a 35.\n", w,k,j);
 
 
 
@@ -515,6 +606,7 @@ long int esNumerolong(char numero[], int tam)
     return esnum;
 
 }
+
 
 
 
