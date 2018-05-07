@@ -31,9 +31,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="abmpt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="abmpt.h" />
+		<Unit filename="ingresodatos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ingresodatos.h" />
+		<Unit filename="lib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="operaciones.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="operaciones.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

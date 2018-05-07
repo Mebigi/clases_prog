@@ -5,7 +5,7 @@
 	<stdlib.h>
 	<conio.h>
 
-1525655891 c:\programacion1cuatri\clases_prog\modeloparcial1\lib.h
+1525661287 c:\programacion1cuatri\clases_prog\modeloparcial1\lib.h
 
 1525655571 source:c:\programacion1cuatri\clases_prog\modeloparcial1\lib.c
 	"lib.h"
@@ -38,4 +38,14 @@
 	<ctype.h>
 
 1525655891 c:\programacion1cuatri\clases_prog\modeloparcial1\operaciones.h
+
+1525657466 source:c:\programacion1cuatri\clases_prog\modeloparcial1\abmpt.c
+	"abmpt.h"
+	"ingresodatos.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1525657368 c:\programacion1cuatri\clases_prog\modeloparcial1\abmpt.h
 
