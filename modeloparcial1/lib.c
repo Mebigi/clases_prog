@@ -1,4 +1,5 @@
 #include "lib.h"
+#include "time.h"
 #include "ingresodatos.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +9,50 @@
 
 
 
+int devolverHorasEstadia()
+{
+    int horas;
+
+    srand(time(NULL));
+
+    horas = (rand()%24)+1;
+
+    return horas ;
+
+}
+
+void imprimirmarcayprecio(int marca)
+{
+    int horas;
+    int precio;
+    switch(marca){
+                    case 1:
+                        horas =devolverHorasEstadia();
+                        precio = horas * 150;
+                        printf("Pagar por estadia ALPHA ROMEO: %d", precio);
+                        break;
+                    case 2:
+                        horas =devolverHorasEstadia();
+                        precio = horas * 175;
+                        printf("Pagar por estadia FERRARI: %d", precio);
+                        break;
+                    case 3:
+                        horas =devolverHorasEstadia();
+                        precio = horas * 200;
+                        printf("Pagar por estadia AUDI: %d", precio);
+                        break;
+
+                  case 4:
+                        horas =devolverHorasEstadia();
+                        precio = horas * 250;
+                        printf("Pagar por estadia OTROS: %d", precio);
+                        break;
+
+    }
+
+
+
+}
 
 
 
@@ -51,7 +96,8 @@ void AltaUsuario(eUsuario lista[], int tam)
     {
         lista[index].idUsuario = index+1;
         getStringletras("\nIngrese Nombre:", lista[index].nombre, 3,25);
-        getString("\nIngrese password: minimo 6 maximo 10 caracteres ", lista[index].pass, 6,10);
+        getString("\nIngrese direccion:", lista[index].direccion, 6,50);
+        getString("\nIngrese Tarjeta: 16 caracteres ", lista[index].tarjeta, 16,16);
         lista[index].estado = 1;
 
     }
@@ -60,6 +106,8 @@ void AltaUsuario(eUsuario lista[], int tam)
         printf("No hay mas espacio para Guardar Usuarios!!!");
 
     }
+
+
 
 
 }
@@ -100,8 +148,7 @@ void ModificacionUsuario(eUsuario lista[],int tam)
     {
         lista[index].idUsuario = index+1;
 
-        getStringletras("\nIngrese Nombre de Usuario: ",lista[index].nombre, 3,25);
-        getString("\nIngrese password: ", lista[index].pass, 6,10);
+        getString("\nIngrese Tarjeta: 16 caracteres ", lista[index].tarjeta, 16,16);
 
         lista[index].estado = 1;
 
@@ -129,20 +176,30 @@ int buscarUsuario(eUsuario vec[],int tam,int id)
 }
 
 
+
+
 //3. BAJA DEL USUARIO: Se ingresa el ID del usuario y eliminará junto con todos
 //sus productos a la venta.
 
-void BajaUsuario(eUsuario lista[], int tam)
+void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tam)
 {
     eUsuario aux= {0};
+    eAutoi auxai= {0};
     int numusuario;
     int index;
+    int indexai;
 
     numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
 
     index=buscarUsuario(lista,tam,numusuario);
     if(index!=-1)
     {
+        indexai=buscarAi(listaAi,tam,numusuario);
+         if(index!=-1)
+         {
+         imprimirmarcayprecio(listaAi[indexai].marca);
+         listaAi[indexai]=auxai;
+         }
         lista[index]=aux;
     }
     else
@@ -153,26 +210,144 @@ void BajaUsuario(eUsuario lista[], int tam)
 }
 
 
+int buscarAi(eAutoi vec[],int tam,int id)
+{
+
+    int retorno= -1;
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].idUsuario==id)
+        {
+            retorno = i;
+        }
+    }
+    return retorno;
+}
+
+
+void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, int tamau)
+{
+
+
+
+
+    int egreso;
+
+    int index;
+    int indexu;
+
+    egreso = IngresarEntero("ID Auto: ", 1, 1000);
+
+
+
+    index=buscarAiporid(listaAi,tama,egreso);
+
+
+    if(index!=-1)
+    {
+
+         index=buscarAi(listaAi,tamau,egreso);
+
+         if(index!=-1)
+         {
+         imprimirmarcayprecio(listaAi[index].marca);
+
+         listaAi[index].estado=0;
+
+
+        indexu=buscarUsuario(lista,tamau,listaAi[index].idUsuario);
+
+        if(indexu!=-1)
+         {
+
+        printf("Nombre Propietario: %s", lista[indexu].nombre);
+
+
+         }
+
+       }
+    }
+
+
+
+    else
+    {
+        printf("Autio no encontrado!!!");
+
+    }
+
+
+
+
+
+
+}
+
+
+
+int buscarAiporid(eAutoi vec[],int tam,int id)
+{
+
+    int retorno= -1;
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].id==id)
+        {
+            retorno = i;
+        }
+    }
+    return retorno;
+}
+
+
+int buscarAemarca(eAutoe vec[],int tam,int marca)
+{
+
+    int retorno= -1;
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].marca==marca)
+        {
+            retorno = i;
+        }
+    }
+    return retorno;
+}
+
+int buscarAimarca(eAutoi vec[],int tam,int marca)
+{
+
+    int retorno= -1;
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].marca==marca)
+        {
+            retorno = i;
+        }
+    }
+    return retorno;
+}
+
 //HardCodePersonas
 
 
 void cargarDatosHardCodePersona(eUsuario lista[])
 {
-    int idUsuario[15]= {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    char nombre[15][25]= {"Mercedes Bigi","Micaela Colella","Galo Matos","Martin Gerbasi","Paula Bigi","Facundo Musil","Gabriela Perez","Lucia Rodriguez","Adrian Alzaroli","Viviana Musil","Pablo Callejo","Alej Arrue","Laura Lertora","Hugo Viere", "Aldo Liendo"};
-    char pass[15][15]= {"xxxBigi","zzzzColella","wwwwMatos","1234Gerbasi","258Bigi","369Musil","8888Perez","1236Rodr","1478Alza","8963Musil","4444Callejo","111Arrue","7777Lertora","9999Viere", "7777Liendo"};
-    int calificacion_venta[15]= {43,22,40,36,35,38,20,30,32,17,16,16,14,11,10};
-    int cantidadventas[15]= {20,10,4,3,5,8,4,6,4,7,1,4,3,5,8};
-    int estado[15]= {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+
+     int idUsuario[4]= {1,2,3,4};
+     char nombre[4][25]= {"Juan","Luis","Maria","Jose"};
+     char tarjeta[4][20]= {"111-111","222-222","333-333","444-444"};
+     char direccion[4][20]= {"mitre","urquiza","belgrano","alsina"};
+     int estado[4]= {1,1,1,1};
 
 
-    for(int i=0; i<15; i++)
+
+    for(int i=0; i<4; i++)
     {
         lista[i].idUsuario=idUsuario[i];
         strcpy(lista[i].nombre, nombre[i]);
-        strcpy(lista[i].pass, pass[i]);
-        lista[i].calificacion_venta=calificacion_venta[i];
-        lista[i].cantidadventas=cantidadventas[i];
+        strcpy(lista[i].tarjeta, tarjeta[i]);
+        strcpy(lista[i].direccion, direccion[i]);
         lista[i].estado=estado[i];
 
     }
@@ -182,9 +357,10 @@ void cargarDatosHardCodePersona(eUsuario lista[])
 //10. LISTAR USUARIOS: Se mostrará una lista de usuarios con la calificación
 //promedio de cada uno.
 
+
 void mostrarListaUsuarios(eUsuario lista[],int tam)
 {
-    float calificacionpromedio=0;
+
 
     for(int i=0; i<tam; i++)
     {
@@ -196,13 +372,6 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
             puts(lista[i].nombre);
 
 
-            if (lista[i].cantidadventas !=0)
-            {
-
-                calificacionpromedio = (float)lista[i].calificacion_venta/lista[i].cantidadventas;
-
-                printf("Calificacion promedio: %.2f", calificacionpromedio);
-            }
 
 
         }
@@ -214,13 +383,7 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
 }
 
 
-//ALTA PRODUCTO
-//4. PUBLICAR PRODUCTO: Se ingresará el ID del usuario y se pedirán los datos
-//del producto a publicar (nombre, precio y stock)
-
-
-
-void AltaPorducto(eProducto lista[], eUsuario listau[], int tam_u, int tam)
+void AltaPorducto(eAutoi lista[], eUsuario listau[], int tam_u, int tam)
 {
     int indexusuario;
     int index;
@@ -236,12 +399,13 @@ void AltaPorducto(eProducto lista[], eUsuario listau[], int tam_u, int tam)
 
         if(index!=-1)
         {
-           lista[index].idProducto = index+1;
+           lista[index].id = index+1;
 
 
-           getStringletras("\nIngrese Nombre de Producto: ",lista[index].producto, 3,25);
-           lista[index].precio = IngresarEnteroFlotante("\nIngrese Precio: ", 1,9999999);//numero de cifras
-           lista[index].stock = IngresarEntero("\nIngrese Stock: ", 1, 1000);
+           getString("\nIngrese Patente: ",lista[index].patente, 3,25);
+           lista[index].marca = IngresarEntero("\nIngrese Marca: ", 1, 1000);
+
+
 
             lista[index].estado = 1;
 
@@ -250,7 +414,7 @@ void AltaPorducto(eProducto lista[], eUsuario listau[], int tam_u, int tam)
         }
         else
         {
-            printf("No hay mas espacio para Guardar Productos!!!");
+            printf("No hay mas espacio para Guardar Autos!!!");
 
         }
 
@@ -265,13 +429,13 @@ void AltaPorducto(eProducto lista[], eUsuario listau[], int tam_u, int tam)
 
 }
 
-int buscarProductoLibre(eProducto vec[],int tam)
+int buscarProductoLibre(eAutoi vec[],int tam)
 {
     int index = -1;
 
     for(int i=0; i<tam; i++)
     {
-        if(vec[i].idProducto==0)
+        if(vec[i].id==0)
         {
             index=i;
             break;
@@ -281,365 +445,47 @@ int buscarProductoLibre(eProducto vec[],int tam)
     return index;
 }
 
-//
 
 
-void cargarDatosHardCodeProductos(eProducto lista[])
+void cargarDatosHardCodeAutoi(eAutoi lista[])
 {
 
-
-    int idProducto[15]= {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    char producto[15][25]= {"Leche","Queso","Margarina","Harina","Arroz","Fideos","Huevos","Detergente","Lavandina","Desodorante","manteca","azucar", "dulce de leche","crema", "sal"};
-    float precio[15]= {100.36,250.25,100.50,200.60,311.32,2363.66,165,50.36,232,1125,200,399,116,388,1000};
-    int cantidad_vendida[15]= {0,0,1,2,3,1,1,5,2,1,2,3,1,3,1};
-    int stock[15]= {1,2,3,6,5,2,3,3,1,1,2,3,1,5,4};
-    int estado[15]= {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-    int idUsuario[15]= {2,1,4,3,6,6,2,8,9,11,10,12,13,14,15};
+    int id[10]= {1,2,3,4,5,6,7,8,9,10};
+    char patente[10][20]= {"AAA","CCC","DDD","BBB","ZZZ","III","HHH","EEE","FFF","GGG"};
+    int marca[10]= {1,3,3,2,2,3,3,4,3,1};
+    int propietario[10]= {2,1,2,1,3,3,4,1,4,3};
 
 
-
-    for(int i=0; i<15; i++)
+    for(int i=0; i<10; i++)
     {
 
-        strcpy(lista[i].producto, producto[i]);
-        lista[i].idProducto=idProducto[i];
-        lista[i].cantidad_vendida=cantidad_vendida[i];
-        lista[i].stock=stock[i];
-        lista[i].precio=precio[i];
-        lista[i].estado=estado[i];
-        lista[i].idUsuario=idUsuario[i];
+        strcpy(lista[i].patente, patente[i]);
+        lista[i].id=id[i];
+        lista[i].marca=marca[i];
+        lista[i].idUsuario=propietario[i];
+
+
 
     }
 }
 
-//LISTAR PUBLICACIONES: Se mostrará una lista de productos indicando: id,
-//nombre, precio, cantidad vendida, stock y nombre del usuario.
 
 
-void mostrarListaProductos(eProducto lista[],eUsuario listau[],int tamu, int tam)
+void cargarDatosHardCodeAutoe(eAutoe lista[])
 {
-    int usuario;
 
-    for(int i=0; i<tam; i++)
+
+    int marca[10]= {1,1,2,3,2,2,3,4,1,1};
+    float importe[10]= {100,200,100,300,100,100,200,200,100,100};
+
+
+    for(int i=0; i<10; i++)
     {
-        if(lista[i].estado==1)
-        {
-            printf("\n---------------------------------------------");
-            printf("\nID N: %d",lista[i].idProducto);
-            printf("\nNombre: ");
-            puts(lista[i].producto);
-            printf("Precio: %.2f",lista[i].precio);
-            printf("\nCantidad ventas: %d",lista[i].cantidad_vendida);
-            printf("\nStock: %d",lista[i].stock);
 
-            usuario = lista[i].idUsuario;
+        lista[i].importe=importe[i];
+        lista[i].marca=marca[i];
 
-            for(int j=0; j<tamu; j++)
-            {
-
-                if(listau[j].idUsuario == usuario && usuario != 0 )
-                {
-                    printf("\nUsuario: %s", listau[j].nombre);
-                }
-
-            }
-
-        }
     }
-
-
-
 }
 
 
-//8. LISTAR PUBLICACIONES DE USUARIO: Se ingresa el ID del usuario y se
-//mostrará una lista de productos indicando: id, nombre, precio, cantidad vendida y
-//stock.
-
-
-void mostrarProductosUsuario(eProducto lista[],eUsuario listau[],int tamu, int tam)
-{
-    int usuario;
-
-    int numusuario;
-    int index;
-
-    numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
-
-    index=buscarUsuario(listau,tamu,numusuario);
-
-    if(index!=-1)
-    {
-        usuario = listau[index].idUsuario;
-        printf("Lista de Productos Publicados por %s \n", listau[index].nombre);
-        printf("-------------------------------------------------------\n");
-
-        for(int i=0; i<tam; i++)
-        {
-            if(lista[i].estado==1 &&  lista[i].idUsuario == usuario)
-            {
-
-                printf("\nID N: %d ",lista[i].idProducto);
-                printf("Producto: ");
-                puts(lista[i].producto);
-                printf("Precio: %.2f ",lista[i].precio);
-                printf("Cantidad ventas: %d ",lista[i].cantidad_vendida);
-                printf("Stock: %d\n",lista[i].stock);
-
-            }
-
-
-
-        }
-
-
-
-
-
-    }
-    else
-    {
-        printf("Usuario no encontrado!!!");
-    }
-
-
-
-
-}
-
-
-//7. COMPRAR PRODUCTO: Se ingresará el ID del producto a comprar, y en el
-//caso que haya stock se realizará la compra, en dicho caso se ingresará una
-//calificación para el vendedor.
-
-void comprarProducto(eProducto lista[],eUsuario listau[],int tamu, int tam)
-{
-    int cantidad;
-    int numproducto;
-    int index;
-    int usuario;
-    int calificar;
-
-
-
-    numproducto = IngresarEntero("ID Producto: ", 1, 1000);
-
-    index=buscarProducto(lista,tam,numproducto);
-
-    if(index!=-1)
-    {
-         printf("\nCantidad: ");
-         scanf("%d",&cantidad);
-
-         if(cantidad >0 && cantidad <= lista[index].stock)
-         {
-             lista[index].stock = lista[index].stock - cantidad;
-             lista[index].cantidad_vendida = lista[index].cantidad_vendida + cantidad;
-
-         }
-
-        usuario = lista[index].idUsuario;
-        printf("\nSe ha realizado la compra con exito, Califica al vendedor: %d", usuario);
-        scanf("%d",&calificar);
-        printf("-------------------------------------------------------\n");
-
-        for(int i=0; i<tamu; i++)
-        {
-            if(listau[i].idUsuario == usuario)
-            {
-                listau[i].calificacion_venta = listau[i].calificacion_venta + calificar;
-                listau[i].cantidadventas++;
-
-            }
-
-
-
-        }
-
-
-
-
-
-    }
-    else
-    {
-        printf("Producto no encontrado!!!");
-    }
-
-
-
-
-}
-
-
-int buscarProducto(eProducto vec[],int tam,int id)
-{
-
-    int retorno= -1;
-
-    for(int i=0; i<tam; i++)
-    {
-        if(vec[i].idProducto==id)
-        {
-            retorno = i;
-        }
-    }
-    return retorno;
-}
-
-
-//5. MODIFICAR PUBLICACIÓN: Se ingresará el ID del usuario y se listarán los
-//productos de dicho usuario mostrando todos sus campos (id, nombre, precio,
-//cantidad vendida y stock), luego ingresar el ID del producto y se pedirá que se
-//ingrese un nuevo precio y stock.
-
-void modificarProducto(eProducto lista[],eUsuario listau[],int tamu, int tam)
-{
-    int usuario;
-    int numusuario;
-    int index;
-    int flag=0;
-    int numuprod;
-    int indexprod;
-
-    numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
-
-
-
-    index=buscarUsuario(listau,tamu,numusuario);
-
-    if(index !=-1)
-    {
-    usuario = listau[index].idUsuario;
-
-
-     for(int i=0;i<tam;i++)
-     {
-        if(lista[i].idUsuario == usuario && lista[i].estado==1)
-        {
-
-            printf("\nLista de Productos Publicados por el usuario\n--------------------------------------------");
-            printf("\nID N: %d",lista[i].idProducto);
-            printf("\nNombre: ");
-            puts(lista[i].producto);
-            printf("Precio: %.2f",lista[i].precio);
-            printf("\nCantidad: %d",lista[i].cantidad_vendida);
-            printf("\nStock: %d",lista[i].stock);
-            flag=1;
-               printf("\n--------------------------------------------\n");
-
-        }
-
-    }
-
-    if(flag == 0)
-    {
-        printf("El susuario no tiene  productos publicados.");
-
-    }
-
-    printf("\nID Producto que desea editar: ");
-    scanf("%d",&numuprod);
-    fflush(stdin);
-
-    indexprod=buscarProducto(lista,tam,numuprod);
-
-    if(indexprod !=-1 && lista[indexprod].idUsuario == usuario)
-    {
-
-           lista[indexprod].precio = IngresarEnteroFlotante("\nIngrese Precio: ", 1,9999999);//numero de cifras
-           lista[indexprod].stock = IngresarEntero("\nIngrese Stock: ", 1, 1000);
-
-    }
-     else{
-           printf("El usuario ingresado no posee ese producto");
-
-    }
-
-    }
-
-    else{
-           printf("No se encontro en usuario.");
-
-    }
-
-}
-
-//6. CANCELAR PUBLICACIÓN: Se ingresará el ID del usuario y se listarán los
-//productos de dicho usuario mostrando todos sus campos (id, nombre, precio,
-//cantidad vendida y stock), luego ingresar el ID del producto que se quiere
-//cancelar su publicación.
-
-void cancelarProducto(eProducto lista[],eUsuario listau[],int tamu, int tam)
-{
-    eProducto aux={0};
-    int usuario;
-    int numusuario;
-    int index;
-    int flag=0;
-    int numuprod;
-    int indexprod;
-
-    numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
-
-
-
-    index=buscarUsuario(listau,tamu,numusuario);
-
-    if(index !=-1)
-    {
-    usuario = listau[index].idUsuario;
-
-
-     for(int i=0;i<tam;i++)
-     {
-        if(lista[i].idUsuario == usuario && lista[i].estado==1)
-        {
-
-            printf("\nLista de Productos Publicados por el usuario\n--------------------------------------------");
-            printf("\nID N: %d",lista[i].idProducto);
-            printf("\nNombre: ");
-            puts(lista[i].producto);
-            printf("Precio: %.2f",lista[i].precio);
-            printf("\nCantidad: %d",lista[i].cantidad_vendida);
-            printf("\nStock: %d",lista[i].stock);
-            flag=1;
-               printf("\n--------------------------------------------\n");
-
-        }
-
-    }
-
-    if(flag == 0)
-    {
-        printf("El susuario no tiene  productos publicados.");
-
-    }
-
-    printf("\nID Producto que desea editar: ");
-    scanf("%d",&numuprod);
-    fflush(stdin);
-
-    indexprod=buscarProducto(lista,tam,numuprod);
-
-    if(indexprod !=-1 && lista[indexprod].idUsuario == usuario)
-    {
-
-
-       lista[indexprod]=aux;
-
-
-    }
-     else{
-           printf("El usuario ingresado no posee ese producto");
-
-    }
-
-    }
-
-    else{
-           printf("No se encontro en usuario.");
-
-    }
-
-}

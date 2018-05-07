@@ -5,12 +5,30 @@
 typedef struct {
     int idUsuario;
     char nombre[25];
-    char pass[15];
-    int calificacion_venta;
-    int cantidadventas;
+    char direccion[15];
+    char tarjeta[15];
     int estado;
 
 }eUsuario;
+
+
+typedef struct {
+    int id;
+    char patente[20];
+    int marca;
+    int idUsuario;
+    int estado;
+
+}eAutoi;
+
+
+typedef struct {
+    int marca;
+    float importe;
+    int estado;
+
+}eAutoe;
+
 
 
 typedef struct {
@@ -25,7 +43,17 @@ typedef struct {
 }eProducto;
 
 
+int devolverHorasEstadia();
 
+void imprimirmarcayprecio(int);
+
+int buscarAemarca(eAutoe vec[],int tam,int marca);
+
+int buscarAimarca(eAutoi vec[],int tam,int marca);
+
+void EgresoAuto(eAutoe [], eAutoi [], eUsuario [], int , int );
+
+int buscarAiporid(eAutoi [],int ,int );
 
 /** \brief lee numeros enterros ingresados en opciones de mennu
  *
@@ -95,6 +123,8 @@ void ModificacionUsuario(eUsuario [],int);
 
 int buscarUsuario(eUsuario [],int ,int );
 
+int buscarAi(eAutoi [],int ,int );
+
 
  /** \brief Baja en una lista tipo de datos eUsuario el ID usuario ingresando
   * \param array tipo de dato eUsuario
@@ -104,10 +134,10 @@ int buscarUsuario(eUsuario [],int ,int );
   *
   */
 
-void BajaUsuario(eUsuario [], int );
-
+void BajaUsuario(eUsuario [], eAutoi [], int );
 /** \brief Muestra una lista tipo de datos eUsuario
   * \param array tipo de dato eUsuario
+    * \param array tipo de dato eAutoi
   * \param tamanno de la lista
 
   * \return
@@ -138,11 +168,11 @@ void cargarDatosHardCodePersona(eUsuario []);
   *
   */
 
-void AltaPorducto(eProducto [], eUsuario [], int , int );
+void AltaPorducto(eAutoi [], eUsuario [], int , int );
 
 
- /** \brief Busca en una lista tipo de datos eProducto y Ingresando por ID usuario
-  * \param array tipo de dato eProducto
+ /** \brief Busca en una lista tipo de datos eAuto y Ingresando por ID usuario
+  * \param array tipo de dato eAuto
   * \param El id del usuario
 
   * \return
@@ -150,7 +180,7 @@ void AltaPorducto(eProducto [], eUsuario [], int , int );
   */
 
 
-int buscarProductoLibre(eProducto [],int );
+int buscarProductoLibre(eAutoi [],int );
 
 
 
@@ -161,7 +191,7 @@ int buscarProductoLibre(eProducto [],int );
   *
   */
 
-void cargarDatosHardCodeProductos(eProducto []);
+void cargarDatosHardCodeAutoi(eAutoi []);
 
  /** \brief imprime lista tipo de datos eProducto y Ingresando por ID usuario
   * \param array tipo de dato eProducto
@@ -173,6 +203,8 @@ void cargarDatosHardCodeProductos(eProducto []);
   *
   */
 
+
+void cargarDatosHardCodeAutoe(eAutoe lista[]);
 
 void mostrarListaProductos(eProducto [],eUsuario [],int , int );
 

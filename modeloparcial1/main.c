@@ -4,7 +4,7 @@
 #include <conio.h>
 
 #define TAM_U 100
-#define TAM_P 1000
+#define TAM_P 20
 #define LONG 25
 
 
@@ -13,10 +13,13 @@ int main()
     {
 
         eUsuario ListaUsuario[TAM_U]= {0};
-        eProducto ListaProducto[TAM_P]= {0};
+        eAutoi ListaAutoi[TAM_P]= {0};
+        eAutoe ListaAutoe[TAM_P]= {0};
 
-        cargarDatosHardCodePersona(ListaUsuario);
-        cargarDatosHardCodeProductos(ListaProducto);
+
+    cargarDatosHardCodePersona(ListaUsuario);
+    cargarDatosHardCodeAutoi(ListaAutoi);
+    cargarDatosHardCodeAutoe(ListaAutoe);
 
 
 
@@ -25,11 +28,11 @@ int main()
         do{
 
 
-                printf("1. ALTA DE USUARIO\n");
-                printf("2. MODIFICAR DATOS DEL USUARIO\n");
-                printf("3. BAJA DEL USUARIO\n");
-                printf("4. PUBLICAR PRODUCTO\n");
-                printf("5. MODIFICAR PUBLICACION\n");
+                printf("1. ALTA DE PROPIETARIO\n");
+                printf("2. MODIFICAR DATOS DEL PROPIETARIO\n");
+                printf("3. BAJA DEL PROPIETARIO\n");
+                printf("4. INGRESO AUTOMOVIL\n");
+                printf("5. ENGRESO AUTOMOVIL\n");
                 printf("6. CANCELAR PUBLICACION\n");
                 printf("7. COMPRAR PRODUCTO\n");
                 printf("8. LISTAR PUBLICACIONES DE USUARIO\n");
@@ -49,14 +52,17 @@ int main()
                         ModificacionUsuario(ListaUsuario, TAM_U);
                         break;
                     case 3:
-                       BajaUsuario(ListaUsuario, TAM_U);
+                       BajaUsuario(ListaUsuario, ListaAutoi, TAM_U);
                         break;
-                    case 4:
-                        AltaPorducto(ListaProducto, ListaUsuario, TAM_U, TAM_P);
+                  case 4:
+                        AltaPorducto(ListaAutoi, ListaUsuario, TAM_U, TAM_P);
                         break;
+
+
                     case 5:
-                        modificarProducto(ListaProducto, ListaUsuario, TAM_U, TAM_P);
+                        EgresoAuto(ListaAutoe, ListaAutoi, ListaUsuario, TAM_P, TAM_U);
                         break;
+                        /*
                     case 6:
                         cancelarProducto(ListaProducto, ListaUsuario, TAM_U, TAM_P);
                         break;
@@ -69,9 +75,13 @@ int main()
                     case 9:
                         mostrarListaProductos(ListaProducto, ListaUsuario, TAM_U, TAM_P);
                         break;
+   */
+
                     case 10:
                         mostrarListaUsuarios(ListaUsuario, TAM_U);
                         break;
+
+
    }
 
             printf("\n\n");

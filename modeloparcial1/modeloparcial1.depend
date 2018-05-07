@@ -49,3 +49,48 @@
 
 1525657368 c:\programacion1cuatri\clases_prog\modeloparcial1\abmpt.h
 
+1525691307 source:c:\test\mercedesbigi\clases_prog\modeloparcial1\abmpt.c
+	"abmpt.h"
+	"ingresodatos.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1525691307 c:\test\mercedesbigi\clases_prog\modeloparcial1\abmpt.h
+
+1525691307 c:\test\mercedesbigi\clases_prog\modeloparcial1\ingresodatos.h
+
+1525691307 source:c:\test\mercedesbigi\clases_prog\modeloparcial1\ingresodatos.c
+	"ingresodatos.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1525691308 source:c:\test\mercedesbigi\clases_prog\modeloparcial1\operaciones.c
+	"operaciones.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1525691308 c:\test\mercedesbigi\clases_prog\modeloparcial1\operaciones.h
+
+1525704550 source:c:\test\mercedesbigi\clases_prog\modeloparcial1\lib.c
+	"lib.h"
+	"time.h"
+	"ingresodatos.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1525703805 c:\test\mercedesbigi\clases_prog\modeloparcial1\lib.h
+
+1525700371 source:c:\test\mercedesbigi\clases_prog\modeloparcial1\main.c
+	"lib.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
