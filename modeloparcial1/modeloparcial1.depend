@@ -114,7 +114,7 @@
 	<ctype.h>
 	<conio.h>
 
-1526665219 source:c:\1ercuatrimestretecnicatura\clases_programacion\clases_prog\modeloparcial1\lib.c
+1526667398 source:c:\1ercuatrimestretecnicatura\clases_programacion\clases_prog\modeloparcial1\lib.c
 	"lib.h"
 	"time.h"
 	"ingresodatos.h"
@@ -123,9 +123,9 @@
 	<conio.h>
 	<string.h>
 
-1526665174 c:\1ercuatrimestretecnicatura\clases_programacion\clases_prog\modeloparcial1\lib.h
+1526666939 c:\1ercuatrimestretecnicatura\clases_programacion\clases_prog\modeloparcial1\lib.h
 
-1526665267 source:c:\1ercuatrimestretecnicatura\clases_programacion\clases_prog\modeloparcial1\main.c
+1526667044 source:c:\1ercuatrimestretecnicatura\clases_programacion\clases_prog\modeloparcial1\main.c
 	"lib.h"
 	<stdio.h>
 	<stdlib.h>

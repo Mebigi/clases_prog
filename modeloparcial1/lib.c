@@ -585,6 +585,7 @@ void recaudacionTotal(eAutoe lista[],int tam)
 
 }
 
+//7. Recaudación total por marca.-
 
 void recaudacionMarca(eAutoe lista[],int tama)
 {
@@ -635,6 +636,51 @@ printf("OTRO       \t\t\t%.2f\n",importe[3]);
 printf("\nTOTAL:   \t\t\t%.2f\n",total);
 printf("\n--------------------------------------------------------------------");
 }
+
+
+//8. Ingresar el Id de un propietario e informar nombre del propietario, unto a la patente y marca de todos los autos que tiene estacionados.-
+
+void DatosUsuario(eUsuario listau[], eAutoi lista[],int tamu, int tama)
+{
+
+    int numusuario;
+    int index;
+
+
+    numusuario = IngresarEntero("\nID Usuario: ", 1, 100); //hasta 100 usuarios puede haber
+
+    index=buscarUsuario(listau,tamu,numusuario);
+
+
+    if(index!=-1)
+    {
+
+        printf("\nNombre: %s\n", listau[index].nombre);
+
+        printf("\nID Auto N\tPatente N\tMarca N\t");
+        printf("\n--------------------------------------------------------------------");
+        for(int i=0; i<tama; i++)
+        {
+        if(lista[i].estado==1 && listau[index].idUsuario == lista[i].idUsuario)
+        {
+            printf("\n%d\t\t%s\t\t",lista[i].id,lista[i].patente);
+            imprimirmarca(lista[i].marca);
+
+          }
+
+        }
+
+ printf("\n--------------------------------------------------------------------");
+
+
+        }
+    else
+    {
+        printf("Usuario no encontrado!!!");
+    }
+
+}
+
 
 //HardCode
 

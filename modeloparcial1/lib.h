@@ -234,5 +234,7 @@ void recaudacionTotal(eAutoe vec[],int tama);
 
 void recaudacionMarca(eAutoe vec[],int tama);
 
+void DatosUsuario(eUsuario [], eAutoi [],int , int );
+
 
 #endif

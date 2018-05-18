@@ -74,10 +74,10 @@ int main()
                 case 7:
                        recaudacionMarca(ListaAutoe, TAM_A);
                         break;
-                        /*
+
                 case 8:
-                        mostrarAutosUsuario(ListaAuto, ListaUsuario, TAM_U, TAM_A);
-                        break;
+                        DatosUsuario(ListaUsuario, ListaAutoi, TAM_U, TAM_A);
+                        break;   /*
                 case 9:
                         mostrarListaAutos(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
