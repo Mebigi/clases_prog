@@ -30,17 +30,14 @@ typedef struct {
 }eAutoe;
 
 
-
 typedef struct {
-    int idAuto;
-    char producto[15];
-    float precio;
-    int cantidad_vendida;
-    int stock;
+    int id;
+    char patente[20];
+    char nombre[25];
     int estado;
-    int idUsuario;
 
-}eAuto;
+
+}eUsuarioAuto;
 
 
 int devolverHorasEstadia();
@@ -214,17 +211,7 @@ void cargarDatosHardCodeAutoe(eAutoe lista[]);
 
 
 
-void mostrarAutosUsuario(eAuto [],eUsuario [],int , int );
 
-
-int buscarAuto(eAuto [],int ,int );
-
-void comprarAuto(eAuto [],eUsuario [],int , int );
-
-
-void modificarAuto(eAuto [],eUsuario [],int , int );
-
-void cancelarAuto(eAuto [],eUsuario [],int , int );
 
 void mostrarListaAutos(eAutoi [],int );
 
@@ -237,6 +224,9 @@ void recaudacionMarca(eAutoe vec[],int );
 void DatosUsuario(eUsuario [], eAutoi [],int , int );
 
 void propietariosAudi(eUsuario [], eAutoi [],int , int );
+void autosEstacionados(eAutoi [], eUsuario [],int , int );
+void ordenarListadoUsuarioAuto(eUsuarioAuto [], int);
 
+void imprimirListadoUsuarioAuto (eUsuarioAuto [], int );
 
 #endif

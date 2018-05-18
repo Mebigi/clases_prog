@@ -229,7 +229,7 @@ int buscarUsuario(eUsuario vec[],int tam,int id)
 
 void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
 {
-    eUsuario aux={0};
+    eUsuario aux= {0};
     int numusuario;
     int index;
     float total;
@@ -370,7 +370,7 @@ int buscarAutoLibre(eAutoi vec[],int tam)
 void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 {
 
-    eAutoi aux={0};
+    eAutoi aux= {0};
     int egreso;
     int index;
     int indexu;
@@ -383,41 +383,41 @@ void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, 
 
     index=buscarAiporid(listaAi,tama,egreso);
 
-     if(index!=-1 && listaAi[index].estado == 1)
+    if(index!=-1 && listaAi[index].estado == 1)
     {
-           indexu=buscarUsuario(lista,tamu,listaAi[index].idUsuario);
+        indexu=buscarUsuario(lista,tamu,listaAi[index].idUsuario);
 
-            if(indexu!=-1)
-            {
+        if(indexu!=-1)
+        {
             printf("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
             printf("\tPropietario: %s", lista[indexu].nombre);
+        }
+
+        printf(" Patente: %s \n\tMarca\t\t Total ", listaAi[index].patente);
+
+        importe= imprimirmarcayprecio(listaAi[index].marca);
+
+        if(Confirmacion("Confirma la Baja?"))
+        {
+            listaAi[index].estado=aux.estado;
+
+            indexae=buscarAutoEgresadoLibre(listaAe,tama);
+
+            if(indexae!=-1)
+            {
+                listaAe[indexae].marca= listaAi[index].marca;
+                listaAe[indexae].importe = importe;
+
+            }
+            else
+            {
+                printf("No hay espacio para guardar autos egresados");
             }
 
-            printf(" Patente: %s \n\tMarca\t\t Total ", listaAi[index].patente);
-
-            importe= imprimirmarcayprecio(listaAi[index].marca);
-
-            if(Confirmacion("Confirma la Baja?"))
-           {
-                listaAi[index].estado=aux.estado;
-
-                indexae=buscarAutoEgresadoLibre(listaAe,tama);
-
-                if(indexae!=-1)
-                {
-                      listaAe[indexae].marca= listaAi[index].marca;
-                      listaAe[indexae].importe = importe;
-
-                }
-                else
-                {
-                    printf("No hay espacio para guardar autos egresados");
-                }
-
-
-           }
 
         }
+
+    }
 
 
 
@@ -514,7 +514,7 @@ int buscarAimarca(eAutoi vec[],int tam,int marca)
 void mostrarListaUsuarios(eUsuario lista[],int tam)
 {
 
-          printf("\nID N:\t\tNombre\t\tTarjeta");
+    printf("\nID N:\t\tNombre\t\tTarjeta");
 
 
     for(int i=0; i<tam; i++)
@@ -530,14 +530,14 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
     }
 
 
-  printf("\n--------------------------------------------------------------\n");
+    printf("\n--------------------------------------------------------------\n");
 }
 
 void mostrarListaAutos(eAutoi lista[],int tam)
 {
 
- printf("\nID Usuario N\tID Auto N\tPatente N\tMarca N\t");
- printf("\n--------------------------------------------------------------------");
+    printf("\nID Usuario N\tID Auto N\tPatente N\tMarca N\t");
+    printf("\n--------------------------------------------------------------------");
     for(int i=0; i<tam; i++)
     {
 
@@ -548,11 +548,11 @@ void mostrarListaAutos(eAutoi lista[],int tam)
             printf("\n%d\t\t%d\t\t%s\t\t",lista[i].idUsuario,lista[i].id,lista[i].patente);
             imprimirmarca(lista[i].marca);
 
-          }
+        }
 
     }
 
- printf("\n--------------------------------------------------------------------");
+    printf("\n--------------------------------------------------------------------");
 
 }
 
@@ -563,9 +563,9 @@ void mostrarListaAutos(eAutoi lista[],int tam)
 
 void recaudacionTotal(eAutoe lista[],int tam)
 {
- float total=0;
- printf("\nMarca\t\t\tImporte N\t\n");
- printf("\n--------------------------------------------------------------------\n");
+    float total=0;
+    printf("\nMarca\t\t\tImporte N\t\n");
+    printf("\n--------------------------------------------------------------------\n");
     for(int i=0; i<tam; i++)
     {
 
@@ -577,11 +577,11 @@ void recaudacionTotal(eAutoe lista[],int tam)
 
             total +=lista[i].importe;
 
-          }
+        }
 
     }
- printf("\nTOTAL:\t\t\t\t%.2f\n",total);
- printf("\n--------------------------------------------------------------------");
+    printf("\nTOTAL:\t\t\t\t%.2f\n",total);
+    printf("\n--------------------------------------------------------------------");
 
 }
 
@@ -590,10 +590,10 @@ void recaudacionTotal(eAutoe lista[],int tam)
 void recaudacionMarca(eAutoe lista[],int tama)
 {
     float total=0;
-    float importe[4]={0};
+    float importe[4]= {0};
 
-     printf("\nMarca      \t\t\tImporte\t\n");
-     printf("\n--------------------------------------------------------------------\n");
+    printf("\nMarca      \t\t\tImporte\t\n");
+    printf("\n--------------------------------------------------------------------\n");
     for(int i=0; i<tama; i++)
     {
 
@@ -601,27 +601,27 @@ void recaudacionMarca(eAutoe lista[],int tama)
         {
             total +=lista[i].importe;
             switch(lista[i].marca)
-           {
+            {
 
-              case 1:
-                   importe[0] +=lista[i].importe;
-                   break;
-              case 2:
-                   importe[1] +=lista[i].importe;
-                   break;
-              case 3:
-                   importe[2] +=lista[i].importe;
-                   break;
-              case 4:
-                   importe[3] +=lista[i].importe;
-                   break;
-
-
-           }
+            case 1:
+                importe[0] +=lista[i].importe;
+                break;
+            case 2:
+                importe[1] +=lista[i].importe;
+                break;
+            case 3:
+                importe[2] +=lista[i].importe;
+                break;
+            case 4:
+                importe[3] +=lista[i].importe;
+                break;
 
 
+            }
 
-          }
+
+
+        }
 
 
 
@@ -629,12 +629,12 @@ void recaudacionMarca(eAutoe lista[],int tama)
     }
 
 
-printf("ALPHA_ROMEO\t\t\t%.2f\n",importe[0]);
-printf("FERRARI    \t\t\t%.2f\n",importe[1]);
-printf("AUDI       \t\t\t%.2f\n",importe[2]);
-printf("OTRO       \t\t\t%.2f\n",importe[3]);
-printf("\nTOTAL:   \t\t\t%.2f\n",total);
-printf("\n--------------------------------------------------------------------");
+    printf("ALPHA_ROMEO\t\t\t%.2f\n",importe[0]);
+    printf("FERRARI    \t\t\t%.2f\n",importe[1]);
+    printf("AUDI       \t\t\t%.2f\n",importe[2]);
+    printf("OTRO       \t\t\t%.2f\n",importe[3]);
+    printf("\nTOTAL:   \t\t\t%.2f\n",total);
+    printf("\n--------------------------------------------------------------------");
 }
 
 
@@ -661,19 +661,19 @@ void DatosUsuario(eUsuario listau[], eAutoi lista[],int tamu, int tama)
         printf("\n--------------------------------------------------------------------");
         for(int i=0; i<tama; i++)
         {
-        if(lista[i].estado==1 && listau[index].idUsuario == lista[i].idUsuario)
-        {
-            printf("\n%d\t\t%s\t\t",lista[i].id,lista[i].patente);
-            imprimirmarca(lista[i].marca);
+            if(lista[i].estado==1 && listau[index].idUsuario == lista[i].idUsuario)
+            {
+                printf("\n%d\t\t%s\t\t",lista[i].id,lista[i].patente);
+                imprimirmarca(lista[i].marca);
 
-          }
-
-        }
-
- printf("\n--------------------------------------------------------------------");
-
+            }
 
         }
+
+        printf("\n--------------------------------------------------------------------");
+
+
+    }
     else
     {
         printf("Usuario no encontrado!!!");
@@ -685,12 +685,12 @@ void DatosUsuario(eUsuario listau[], eAutoi lista[],int tamu, int tama)
 void propietariosAudi(eUsuario listau[], eAutoi lista[],int tamu, int tama)
 {
 
-       for (int j=0; j<tamu; j++)
-       {
+    for (int j=0; j<tamu; j++)
+    {
         if(listau[j].estado==1)
         {
             for(int i=0; i<tama; i++)
-           {
+            {
                 if(lista[i].marca==AUDI && listau[j].idUsuario == lista[i].idUsuario && lista[i].estado==1)
                 {
                     printf("\n%s\t\t",listau[j].nombre);
@@ -699,17 +699,112 @@ void propietariosAudi(eUsuario listau[], eAutoi lista[],int tamu, int tama)
                     break;
 
                 }
+            }
+
+
         }
 
+    }
 
-           }
 
-      }
+}
+
+//10. Listado de los autos estacionados con sus propietarios, ordenados por patente.-
+
+void autosEstacionados(eAutoi lista[], eUsuario listau[],int tama, int tamu)
+{
+
+   eUsuarioAuto planilla[20]={0};
+
+    for (int j=0; j<tamu; j++)
+    {   //primero recorro el vector mas grande el del usuario
+        if(listau[j].estado==1)
+            //si el usuario esta activo busca que autos tiene
+       {
+         for(int i=0; i<tama; i++)
+         {
+              if(lista[i].idUsuario==listau[j].idUsuario && lista[i].estado==1)
+              {
+                      strcpy(planilla[i].patente,lista[i].patente);
+                      strcpy(planilla[i].nombre,listau[j].nombre);
+                      planilla[i].id=lista[i].id;
+                      planilla[i].estado= lista[i].estado;
+
+
+
+              }
+
+
+         }
+       }
+    }
+imprimirListadoUsuarioAuto(planilla, tama);
 
 
 }
 
 
+
+void imprimirListadoUsuarioAuto (eUsuarioAuto lista[], int tam)
+{
+    int i;
+    int flag= 0;
+
+   ordenarListadoUsuarioAuto(lista, tam);
+
+   printf("\nPatente\t\tID\t\tNombre \n");
+
+    for(i=0; i<tam; i++)
+    {
+        if(lista[i].estado==1)
+        {
+
+            printf("\n%s\t\t\%d\t\t%s \n", lista[i].patente, lista[i].id, lista[i].nombre);
+            flag = 1;
+
+
+        }
+    }
+    if(flag == 0)
+    {
+        printf("\nNo existen registros cargados\n");
+    }
+
+
+
+}
+
+
+
+
+ void ordenarListadoUsuarioAuto(eUsuarioAuto lista[], int tam)
+ {
+
+    eUsuarioAuto aux[tam];
+
+    for(int i=0; i<tam-1; i++)
+    {
+
+        for(int j=i+1; j<tam; j++)
+        {
+            if(lista[i].estado== 1)
+            {
+
+                if((strcmp(lista[i].patente,lista[j].patente))> 0)
+                {
+                    aux[i]= lista[i];
+                    lista[i]=lista[j];
+                    lista[j]=aux[i];
+
+                }
+
+            }
+
+        }
+    }
+
+
+ }
 
 //HardCode
 
