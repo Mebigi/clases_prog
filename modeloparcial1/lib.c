@@ -344,25 +344,20 @@ int buscarAutoLibre(eAutoi vec[],int tam)
 void EgresoAuto(eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 {
 
-    eAutoi aux={0};
+
     int egreso;
     int index;
     int indexu;
 
-    egreso = IngresarEntero("\nID Auto: ", 1, 1000);
+    mostrarListaAutos(listaAi, tama);
+
+    egreso = IngresarEntero("\nIngresar ID Auto: ", 1, 1000);
 
     index=buscarAiporid(listaAi,tama,egreso);
 
-    printf("id %d", listaAi[index].id);
-
-    if(index!=-1 && listaAi[index].estado == 1)
+     if(index!=-1 && listaAi[index].estado == 1)
     {
-        index=buscarAi(listaAi,tama,egreso);
-
-        if(index!=-1)
-        {
-
-            indexu=buscarUsuario(lista,tamu,listaAi[index].idUsuario);
+           indexu=buscarUsuario(lista,tamu,listaAi[index].idUsuario);
 
             if(indexu!=-1)
             {
@@ -372,20 +367,16 @@ void EgresoAuto(eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 
             printf(" Patente: %s \n\tMarca\t\t Total ", listaAi[index].patente);
 
-
             imprimirmarcayprecio(listaAi[index].marca);
 
-            //if(Confirmacion("Confirma la Baja?"))
-          //  {
+            if(Confirmacion("Confirma la Baja?"))
+           {
+                listaAi[index].estado=0;
 
-
-                listaAi[index]=aux;
-                printf("cambio estado %d", listaAi[index].estado);
-
-           // }
+           }
 
         }
-    }
+
 
 
 
@@ -555,4 +546,27 @@ void cargarDatosHardCodeAutoe(eAutoe lista[])
     }
 }
 
+
+
+void mostrarListaAutos(eAutoi lista[],int tam)
+{
+
+ printf("\nID Usuario N\tID Auto N\tPatente N\tMarca N\t");
+ printf("\n--------------------------------------------------------------------");
+    for(int i=0; i<tam; i++)
+    {
+
+
+        if(lista[i].estado==1)
+        {
+
+            printf("\n%d\t\t%d\t\t%s\t\t%d\t\t",lista[i].idUsuario,lista[i].id,lista[i].patente,lista[i].marca);
+
+          }
+
+    }
+
+ printf("\n--------------------------------------------------------------------");
+
+}
 

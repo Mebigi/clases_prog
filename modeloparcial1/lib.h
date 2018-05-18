@@ -209,7 +209,7 @@ void cargarDatosHardCodeAutoi(eAutoi []);
 
 void cargarDatosHardCodeAutoe(eAutoe lista[]);
 
-void mostrarListaAutos(eAuto [],eUsuario [],int , int );
+
 
 
 void mostrarAutosUsuario(eAuto [],eUsuario [],int , int );
@@ -223,6 +223,8 @@ void comprarAuto(eAuto [],eUsuario [],int , int );
 void modificarAuto(eAuto [],eUsuario [],int , int );
 
 void cancelarAuto(eAuto [],eUsuario [],int , int );
+
+void mostrarListaAutos(eAutoi [],int );
 
 
 #endif
