@@ -59,6 +59,28 @@ int imprimirmarcayprecio(int marca)
 
 }
 
+void imprimirmarca(int marca)
+{
+
+    switch(marca)
+    {
+    case 1:
+        printf("ALPHA ROMEO");
+        break;
+    case 2:
+        printf("FERRARI    ");
+        break;
+    case 3:
+        printf("AUDI       ");
+        break;
+
+    case 4:
+        printf("OTROS      ");
+        break;
+
+    }
+}
+
 
 
 //OPCIONES MENU
@@ -341,13 +363,15 @@ int buscarAutoLibre(eAutoi vec[],int tam)
 //Nombre del propietario, patente de l auto, marca y valor de la estadía.
 
 
-void EgresoAuto(eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
+void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 {
 
 
     int egreso;
     int index;
     int indexu;
+    int indexae;
+    int importe;
 
     mostrarListaAutos(listaAi, tama);
 
@@ -367,11 +391,25 @@ void EgresoAuto(eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 
             printf(" Patente: %s \n\tMarca\t\t Total ", listaAi[index].patente);
 
-            imprimirmarcayprecio(listaAi[index].marca);
+            importe= imprimirmarcayprecio(listaAi[index].marca);
 
             if(Confirmacion("Confirma la Baja?"))
            {
                 listaAi[index].estado=0;
+
+                indexae=buscarAutoEgresadoLibre(listaAe,tama);
+
+                if(indexae!=-1)
+                {
+                      listaAe[indexae].marca= listaAi[index].marca;
+                      listaAe[indexae].importe = importe;
+
+                }
+                else
+                {
+                    printf("No hay espacio para guardar autos egresados");
+                }
+
 
            }
 
@@ -388,6 +426,26 @@ void EgresoAuto(eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 
 
 }
+
+
+int buscarAutoEgresadoLibre(eAutoe vec[],int tam)
+{
+    int index = -1;
+
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].marca==0)
+        {
+            index=i;
+            break;
+        }
+    }
+
+    return index;
+}
+
+
+
 
 int buscarAiporid(eAutoi vec[],int tam,int id)
 {
@@ -445,35 +503,9 @@ int buscarAimarca(eAutoi vec[],int tam,int marca)
     return retorno;
 }
 
-//HardCodePersonas
 
 
-void cargarDatosHardCodePersona(eUsuario lista[])
-{
-
-    int idUsuario[4]= {1,2,3,4};
-    char nombre[4][25]= {"Juan","Luis","Maria","Jose"};
-    char tarjeta[4][20]= {"111-111","222-222","333-333","444-444"};
-    char direccion[4][20]= {"mitre","urquiza","belgrano","alsina"};
-    int estado[4]= {1,1,1,1};
-
-
-
-    for(int i=0; i<4; i++)
-    {
-        lista[i].idUsuario=idUsuario[i];
-        strcpy(lista[i].nombre, nombre[i]);
-        strcpy(lista[i].tarjeta, tarjeta[i]);
-        strcpy(lista[i].direccion, direccion[i]);
-        lista[i].estado=estado[i];
-
-    }
-}
-
-
-//10. LISTAR USUARIOS: Se mostrará una lista de usuarios con la calificación
-//promedio de cada uno.
-
+//10. LISTAR USUARIOS:
 
 void mostrarListaUsuarios(eUsuario lista[],int tam)
 {
@@ -501,6 +533,133 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
 
 }
 
+void mostrarListaAutos(eAutoi lista[],int tam)
+{
+
+ printf("\nID Usuario N\tID Auto N\tPatente N\tMarca N\t");
+ printf("\n--------------------------------------------------------------------");
+    for(int i=0; i<tam; i++)
+    {
+
+
+        if(lista[i].estado==1)
+        {
+
+            printf("\n%d\t\t%d\t\t%s\t\t",lista[i].idUsuario,lista[i].id,lista[i].patente);
+            imprimirmarca(lista[i].marca);
+
+          }
+
+    }
+
+ printf("\n--------------------------------------------------------------------");
+
+}
+
+
+//6. Recaudación total del estacionamiento.-
+
+
+
+void recaudacionTotal(eAutoe lista[],int tam)
+{
+ float total=0;
+ printf("\nMarca\t\t\tImporte N\t\n");
+ printf("\n--------------------------------------------------------------------\n");
+    for(int i=0; i<tam; i++)
+    {
+
+
+        if(lista[i].importe!=0)
+        {
+            imprimirmarca(lista[i].marca);
+            printf("\t\t\t%.2f\n",lista[i].importe);
+
+            total +=lista[i].importe;
+
+          }
+
+    }
+ printf("\nTOTAL:\t\t\t\t%.2f\n",total);
+ printf("\n--------------------------------------------------------------------");
+
+}
+
+
+void recaudacionMarca(eAutoe lista[],int tama)
+{
+    float total=0;
+    float importe[4]={0};
+
+     printf("\nMarca      \t\t\tImporte\t\n");
+     printf("\n--------------------------------------------------------------------\n");
+    for(int i=0; i<tama; i++)
+    {
+
+        if(lista[i].importe>0)
+        {
+            total +=lista[i].importe;
+            switch(lista[i].marca)
+           {
+
+              case 1:
+                   importe[0] +=lista[i].importe;
+                   break;
+              case 2:
+                   importe[1] +=lista[i].importe;
+                   break;
+              case 3:
+                   importe[2] +=lista[i].importe;
+                   break;
+              case 4:
+                   importe[3] +=lista[i].importe;
+                   break;
+
+
+           }
+
+
+
+          }
+
+
+
+
+    }
+
+
+printf("ALPHA_ROMEO\t\t\t%.2f\n",importe[0]);
+printf("FERRARI    \t\t\t%.2f\n",importe[1]);
+printf("AUDI       \t\t\t%.2f\n",importe[2]);
+printf("OTRO       \t\t\t%.2f\n",importe[3]);
+printf("\nTOTAL:   \t\t\t%.2f\n",total);
+printf("\n--------------------------------------------------------------------");
+}
+
+//HardCode
+
+
+void cargarDatosHardCodePersona(eUsuario lista[])
+{
+
+    int idUsuario[4]= {1,2,3,4};
+    char nombre[4][25]= {"Juan","Luis","Maria","Jose"};
+    char tarjeta[4][20]= {"111-111","222-222","333-333","444-444"};
+    char direccion[4][20]= {"mitre","urquiza","belgrano","alsina"};
+    int estado[4]= {1,1,1,1};
+
+
+
+    for(int i=0; i<4; i++)
+    {
+        lista[i].idUsuario=idUsuario[i];
+        strcpy(lista[i].nombre, nombre[i]);
+        strcpy(lista[i].tarjeta, tarjeta[i]);
+        strcpy(lista[i].direccion, direccion[i]);
+        lista[i].estado=estado[i];
+
+    }
+}
 
 
 void cargarDatosHardCodeAutoi(eAutoi lista[])
@@ -510,7 +669,7 @@ void cargarDatosHardCodeAutoi(eAutoi lista[])
     char patente[10][20]= {"AAA","CCC","DDD","BBB","ZZZ","III","HHH","EEE","FFF","GGG"};
     int marca[10]= {1,3,3,2,2,3,3,4,3,1};
     int propietario[10]= {2,1,2,1,3,3,4,1,4,3};
-    int estado[10]= {0,1,1,1,1,1,1,1,1,1};
+    int estado[10]= {1,1,1,1,1,1,1,1,1,1};
 
 
     for(int i=0; i<10; i++)
@@ -526,8 +685,6 @@ void cargarDatosHardCodeAutoi(eAutoi lista[])
 
     }
 }
-
-
 
 void cargarDatosHardCodeAutoe(eAutoe lista[])
 {
@@ -546,27 +703,4 @@ void cargarDatosHardCodeAutoe(eAutoe lista[])
     }
 }
 
-
-
-void mostrarListaAutos(eAutoi lista[],int tam)
-{
-
- printf("\nID Usuario N\tID Auto N\tPatente N\tMarca N\t");
- printf("\n--------------------------------------------------------------------");
-    for(int i=0; i<tam; i++)
-    {
-
-
-        if(lista[i].estado==1)
-        {
-
-            printf("\n%d\t\t%d\t\t%s\t\t%d\t\t",lista[i].idUsuario,lista[i].id,lista[i].patente,lista[i].marca);
-
-          }
-
-    }
-
- printf("\n--------------------------------------------------------------------");
-
-}
 

@@ -25,7 +25,7 @@ typedef struct {
 typedef struct {
     int marca;
     float importe;
-    int estado;
+
 
 }eAutoe;
 
@@ -51,12 +51,14 @@ int buscarAemarca(eAutoe vec[],int tam,int marca);
 
 int buscarAimarca(eAutoi vec[],int tam,int marca);
 
-void EgresoAuto(eAutoi [], eUsuario [], int , int );
+void EgresoAuto(eAutoe [], eAutoi [], eUsuario [], int , int );
 
 int buscarAiporid(eAutoi [],int ,int );
 
 
 float calculadorDeuda(eAutoi [],int ,int );
+
+int buscarAutoEgresadoLibre(eAutoe [],int );
 
 /** \brief lee numeros enterros ingresados en opciones de mennu
  *
@@ -225,6 +227,12 @@ void modificarAuto(eAuto [],eUsuario [],int , int );
 void cancelarAuto(eAuto [],eUsuario [],int , int );
 
 void mostrarListaAutos(eAutoi [],int );
+
+void imprimirmarca(int );
+
+void recaudacionTotal(eAutoe vec[],int tama);
+
+void recaudacionMarca(eAutoe vec[],int tama);
 
 
 #endif

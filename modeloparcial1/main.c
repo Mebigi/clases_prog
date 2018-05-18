@@ -65,19 +65,20 @@ int main()
                         break;
 
                 case 5:
-                        EgresoAuto(ListaAutoi, ListaUsuario, TAM_A, TAM_U);
+                        EgresoAuto(ListaAutoe, ListaAutoi, ListaUsuario, TAM_A, TAM_U);
+                        break;
+
+                case 6:
+                        recaudacionTotal(ListaAutoe, TAM_A);
+                        break;
+                case 7:
+                       recaudacionMarca(ListaAutoe, TAM_A);
                         break;
                         /*
-                    case 6:
-                        cancelarAuto(ListaAuto, ListaUsuario, TAM_U, TAM_A);
-                        break;
-                    case 7:
-                        comprarAuto(ListaAuto, ListaUsuario, TAM_U, TAM_A);
-                        break;
-                    case 8:
+                case 8:
                         mostrarAutosUsuario(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
-                    case 9:
+                case 9:
                         mostrarListaAutos(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
    */
