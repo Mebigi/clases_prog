@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <conio.h>
 
 //INGRESO Y VALIDAR DATOS INGRESADOS
 
@@ -143,7 +144,7 @@ int IngresarEntero(char mensaje[], int min, int max)
 
     do
     {
-    printf("%s:\n", mensaje);
+    printf("%s", mensaje);
     fflush(stdin);
     gets(entero);
 
@@ -259,10 +260,38 @@ void getStringletras(char mensaje[],char input[], int min, int max)
 
         estex = esTexto(input);
 
+        if (estex == 0)
+        {
+            printf("Error, ingresar %cnicamente letras", 163);
         }
 
+        }
         while (estex == 0);
 }
+
+
+void getStringEntero(char mensaje[],char input[], int min, int max)
+{
+        int esnum=0;
+        do
+        {
+        getString(mensaje, input, min,max);
+
+        esnum = esNumero(input);
+
+        if (esnum == 0)
+        {
+            printf("Error, ingresar %cnicamente n%cmeros", 163, 163);
+        }
+
+        }
+        while (esnum == 0);
+}
+
+
+
+
+
 
 
 int esTexto(char texto[])
@@ -274,7 +303,7 @@ int esTexto(char texto[])
 
     for (int i=0; i<len; i++)
     {
-        if (isalpha(texto[i]))
+        if (isalpha(texto[i]) || isspace(texto[i]))
         {
             estexto = 1;
         }
@@ -293,3 +322,63 @@ int esTexto(char texto[])
     return estexto;
 
 }
+
+
+
+
+int esNumero(char numero[])
+{
+
+    int esnum = 0;
+
+    int len = strlen(numero);
+
+    for (int i=0; i<len; i++)
+    {
+        if (isdigit(numero[i]))
+        {
+            esnum = 1;
+        }
+        else
+        {
+
+            esnum = 0;
+            break;
+
+        }
+
+
+
+    }
+
+    return esnum;
+
+}
+
+int Confirmacion(char mensaje[])
+{
+     char confirma;
+     int retorno=0;
+
+      printf("\n.....................................................");
+
+
+     printf("\n%s s/n: ", mensaje);
+
+
+
+     confirma= getche();
+     confirma= tolower(confirma);
+
+
+     if(confirma == 's')
+     {
+         retorno=1;
+
+     }
+
+     return retorno;
+
+}
+
+

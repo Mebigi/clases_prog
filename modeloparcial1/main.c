@@ -4,7 +4,7 @@
 #include <conio.h>
 
 #define TAM_U 100
-#define TAM_P 20
+#define TAM_A 20
 #define LONG 25
 
 
@@ -12,9 +12,10 @@ int main()
 {
     {
 
+
         eUsuario ListaUsuario[TAM_U]= {0};
-        eAutoi ListaAutoi[TAM_P]= {0};
-        eAutoe ListaAutoe[TAM_P]= {0};
+        eAutoi ListaAutoi[TAM_A]= {0};
+        eAutoe ListaAutoe[TAM_A]= {0};
 
 
     cargarDatosHardCodePersona(ListaUsuario);
@@ -33,16 +34,21 @@ int main()
                 printf("3. BAJA DEL PROPIETARIO\n");
                 printf("4. INGRESO AUTOMOVIL\n");
                 printf("5. ENGRESO AUTOMOVIL\n");
-                printf("6. CANCELAR PUBLICACION\n");
-                printf("7. COMPRAR PRODUCTO\n");
-                printf("8. LISTAR PUBLICACIONES DE USUARIO\n");
-                printf("9. LISTAR PUBLICACIONES\n");
-                printf("10. LISTAR USUARIOS\n");
+                printf("6. RECAUDACIÓN TOTAL DEL ESTACIONAMIENTO\n");
+                printf("7. RECAUDACIÓN TOTAL POR MARCA\n");
+                printf("8. CONSULTA DATOS PROPIETARIO POR ID\n");
+                printf("9. PROPIETARIOS DE LA MARCA AUDI\n");
+                printf("10. LISTADO DE LOS AUTOS ESTACIONADOS y PROPIETARIOS\n");
                 printf("11. Salir\n");
 
 
 
+                printf("\nINGRESAR UNA OPCION: ");
+
                 opcion = IngresarOpcionMenu(1,11);
+
+                 printf("\n.....................................................");
+
 
                 switch(opcion){
                     case 1:
@@ -52,28 +58,27 @@ int main()
                         ModificacionUsuario(ListaUsuario, TAM_U);
                         break;
                     case 3:
-                       BajaUsuario(ListaUsuario, ListaAutoi, TAM_U);
+                       BajaUsuario(ListaUsuario, ListaAutoi, TAM_U, TAM_A);
                         break;
                   case 4:
-                        AltaPorducto(ListaAutoi, ListaUsuario, TAM_U, TAM_P);
+                        AltaAuto(ListaAutoi, ListaUsuario, TAM_U, TAM_A);
                         break;
 
-
-                    case 5:
-                        EgresoAuto(ListaAutoe, ListaAutoi, ListaUsuario, TAM_P, TAM_U);
+                case 5:
+                        EgresoAuto(ListaAutoi, ListaUsuario, TAM_A, TAM_U);
                         break;
                         /*
                     case 6:
-                        cancelarProducto(ListaProducto, ListaUsuario, TAM_U, TAM_P);
+                        cancelarAuto(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
                     case 7:
-                        comprarProducto(ListaProducto, ListaUsuario, TAM_U, TAM_P);
+                        comprarAuto(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
                     case 8:
-                        mostrarProductosUsuario(ListaProducto, ListaUsuario, TAM_U, TAM_P);
+                        mostrarAutosUsuario(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
                     case 9:
-                        mostrarListaProductos(ListaProducto, ListaUsuario, TAM_U, TAM_P);
+                        mostrarListaAutos(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
    */
 

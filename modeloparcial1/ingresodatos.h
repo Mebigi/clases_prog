@@ -103,6 +103,15 @@ void getStringletras(char [],char [], int , int );
 
 int esTexto(char []);
 
+int esNumero(char []);
+
+int Confirmacion(char []);
+
+
+void getStringEntero(char [],char [], int , int );
+
+
+
 
 
 

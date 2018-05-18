@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-
-
-
+#define ALPHA_ROMEO 1
+#define FERRARI 2
+#define AUDI 3
+#define OTRO 4
 
 int devolverHorasEstadia()
 {
@@ -21,36 +22,40 @@ int devolverHorasEstadia()
 
 }
 
-void imprimirmarcayprecio(int marca)
+int imprimirmarcayprecio(int marca)
 {
     int horas;
     int precio;
-    switch(marca){
-                    case 1:
-                        horas =devolverHorasEstadia();
-                        precio = horas * 150;
-                        printf("Pagar por estadia ALPHA ROMEO: %d", precio);
-                        break;
-                    case 2:
-                        horas =devolverHorasEstadia();
-                        precio = horas * 175;
-                        printf("Pagar por estadia FERRARI: %d", precio);
-                        break;
-                    case 3:
-                        horas =devolverHorasEstadia();
-                        precio = horas * 200;
-                        printf("Pagar por estadia AUDI: %d", precio);
-                        break;
 
-                  case 4:
-                        horas =devolverHorasEstadia();
-                        precio = horas * 250;
-                        printf("Pagar por estadia OTROS: %d", precio);
-                        break;
+
+    switch(marca)
+    {
+    case 1:
+        horas =devolverHorasEstadia();
+        precio = horas * 150;
+        printf("\n\tALPHA ROMEO:\t %d$", precio);
+        break;
+    case 2:
+        horas =devolverHorasEstadia();
+        precio = horas * 175;
+        printf("\n\tFERRARI: \t %d$", precio);
+        break;
+    case 3:
+        horas =devolverHorasEstadia();
+        precio = horas * 200;
+        printf("\n\tAUDI:    \t %d$", precio);
+        break;
+
+    case 4:
+        horas =devolverHorasEstadia();
+        precio = horas * 250;
+        printf("\n\tOTROS:   \t %d$", precio);
+        break;
 
     }
 
 
+    return precio;
 
 }
 
@@ -84,33 +89,46 @@ int validarOpcionMenu (int dato, int min, int max)
 
 }
 
-//1. ALTA DE USUARIO: Se piden los datos del usuario requeridos para que el
-//sistema pueda funcionar.
+//1. Alta de propietario. Se ingresa:
+//* IdPropietario
+//* Nombre y Apellido
+//* Dirección
+//* Número de tarjeta de crédito
+
 
 void AltaUsuario(eUsuario lista[], int tam)
 {
+    eUsuario aux = {0};
     int index;
     index=buscarUsuarioLibre(lista,tam);
+
 
     if(index!=-1)
     {
         lista[index].idUsuario = index+1;
-        getStringletras("\nIngrese Nombre:", lista[index].nombre, 3,25);
-        getString("\nIngrese direccion:", lista[index].direccion, 6,50);
-        getString("\nIngrese Tarjeta: 16 caracteres ", lista[index].tarjeta, 16,16);
+        printf("\nALTA USUARIO ID: %d\n", index+1);
+        getStringletras("\nIngrese Nombre: ", lista[index].nombre, 3,30);
+        getString("\nIngrese direccion: ", lista[index].direccion, 6,50);
+        getStringEntero("\nIngrese Tarjeta 16 numeros.\n (sin espacios ni guiones): ", lista[index].tarjeta, 16,16);
         lista[index].estado = 1;
 
+
+        if(Confirmacion("Confirma el Alta?") ==0)
+        {
+            lista[index]= aux;
+            printf("\nAlta de Usuario Cancelada");
+        }
+
     }
+
     else
     {
         printf("No hay mas espacio para Guardar Usuarios!!!");
 
     }
 
-
-
-
 }
+
 
 int buscarUsuarioLibre(eUsuario vec[],int tam)
 {
@@ -129,8 +147,8 @@ int buscarUsuarioLibre(eUsuario vec[],int tam)
 }
 
 
-//2. MODIFICAR DATOS DEL USUARIO: Se ingresa el ID del usuario, permitiendo
-//modificar sus datos.
+//2. Modificación de propietario. El propietario
+//del auto notifica el cambio en el número de la tarjeta de crédito.
 
 void ModificacionUsuario(eUsuario lista[],int tam)
 {
@@ -138,25 +156,34 @@ void ModificacionUsuario(eUsuario lista[],int tam)
     int numusuario;
 
     int index;
+    char tarjeta[17]; //16 numero mas el espacio
 
-    numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
+
+    numusuario = IngresarEntero("\nID Usuario: ", 1, 100); //hasta 100 usuarios puede haber
 
     index=buscarUsuario(lista,tam,numusuario);
 
 
     if(index!=-1)
     {
-        lista[index].idUsuario = index+1;
 
-        getString("\nIngrese Tarjeta: 16 caracteres ", lista[index].tarjeta, 16,16);
+        printf("\nNombre: %s\n", lista[index].nombre);
+        getStringEntero("\nIngrese Tarjeta 16 numeros.\n (sin espacios ni guiones): ", tarjeta, 16,16);
 
-        lista[index].estado = 1;
+
+        if (Confirmacion("\nConfirma el cambio?"))
+        {
+            strcpy(lista[index].tarjeta, tarjeta);
+        }
+        else
+        {
+            printf("\nOperaci%cn Cancelada", 162);
+        }
 
     }
     else
     {
         printf("Usuario no encontrado!!!");
-
     }
 
 }
@@ -175,32 +202,39 @@ int buscarUsuario(eUsuario vec[],int tam,int id)
     return retorno;
 }
 
-
-
-
 //3. BAJA DEL USUARIO: Se ingresa el ID del usuario y eliminará junto con todos
 //sus productos a la venta.
 
-void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tam)
+void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
 {
-    eUsuario aux= {0};
-    eAutoi auxai= {0};
     int numusuario;
     int index;
-    int indexai;
+    float total;
 
-    numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
+    numusuario = IngresarEntero("\nID Usuario: ", 1, 100);
 
-    index=buscarUsuario(lista,tam,numusuario);
+    index=buscarUsuario(lista,tamu,numusuario);
+
     if(index!=-1)
     {
-        indexai=buscarAi(listaAi,tam,numusuario);
-         if(index!=-1)
-         {
-         imprimirmarcayprecio(listaAi[indexai].marca);
-         listaAi[indexai]=auxai;
-         }
-        lista[index]=aux;
+        printf("\nNombre: %s\n", lista[index].nombre);
+        if(Confirmacion("Confirma la Baja?"))
+        {
+            total = calculadorDeuda(listaAi,tamai,numusuario);
+
+            if(total!=0)
+            {
+
+                printf("\n\tTOTAL: %.2f$", total);
+
+
+            }
+            else
+            {
+                printf("\nEL USUARIO NO TIENE\nAUTOS INGRESADOS");
+            }
+            lista[index].estado=0;
+        }
     }
     else
     {
@@ -210,80 +244,159 @@ void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tam)
 }
 
 
-int buscarAi(eAutoi vec[],int tam,int id)
+
+float calculadorDeuda(eAutoi vec[],int tam,int id)
 {
 
-    int retorno= -1;
+    float total=0;
+    eAutoi aux= {0};
+
+    printf("\n\n+++++++TICKET: Estad%ca+++++++\n", 161);
+
     for(int i=0; i<tam; i++)
     {
         if(vec[i].idUsuario==id)
         {
-            retorno = i;
+            total += imprimirmarcayprecio(vec[i].marca);
+            vec[i]=aux;
         }
     }
-    return retorno;
+
+    printf("\n\n+++++++++++++++++++++++++++++\n");
+
+    return total;
 }
 
 
-void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, int tamau)
+//4. Ingreso del automóvil (estacionados). Se registra la siguiente información del automóvil que ingresa al estacionamiento.-
+//*Patente (string)
+//*Marca (Utilizar #define con los siguientes valores: ALPHA_ROMEO, FERRARI, AUDI, OTRO)
+//* Propietario (identificador número)
+
+
+
+void AltaAuto(eAutoi lista[], eUsuario listau[], int tam_u, int tam)
+{
+    int indexusuario;
+    int index;
+    int numusuario;
+    eAutoi aux= {0};
+
+    numusuario = IngresarEntero("\nID Usuario: ", 1, 1000);
+
+    indexusuario=buscarUsuario(listau,tam_u,numusuario);
+
+    if(indexusuario!=-1)
+    {
+        printf("\nNombre: %s\n", listau[indexusuario].nombre);
+        index=buscarAutoLibre(lista,tam);
+
+        if(index!=-1)
+        {
+            lista[index].id = index+1;
+            getString("\nIngrese Patente: ",lista[index].patente, 3,25);
+
+            lista[index].marca = IngresarEntero("\n(OPCION 1-ALPHA_ROMEO, 2-FERRARI, 3-AUDI, 4-OTRO )\nIngrese Marca: ", 1, 4);
+            lista[index].estado = 1;
+            lista[index].idUsuario = listau[indexusuario].idUsuario;
+
+            if(Confirmacion("Confirma el Ingreso del Automovil?") ==0)
+            {
+                lista[index]= aux;
+                printf("\n Ingreso del Automovil Cancelado");
+            }
+        }
+        else
+        {
+            printf("No hay mas espacio para Guardar Autos!!!");
+        }
+    }
+    else
+    {
+        printf("El Usuario no existe");
+    }
+
+}
+
+int buscarAutoLibre(eAutoi vec[],int tam)
+{
+    int index = -1;
+
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].id==0)
+        {
+            index=i;
+            break;
+        }
+    }
+
+    return index;
+}
+
+
+//Egreso del Automóvil (No estacionados):
+// calcular el valor de la estadía. Para ello se utilizará una función que se encargará de determinar el tiempo de estadía del auto.
+//(Esta función ya se encuentra implementada). Al mismo tiempo del egreso se debe emitir un ticket por pantalla informando:
+//Nombre del propietario, patente de l auto, marca y valor de la estadía.
+
+
+void EgresoAuto(eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 {
 
-
-
-
+    eAutoi aux={0};
     int egreso;
-
     int index;
     int indexu;
 
-    egreso = IngresarEntero("ID Auto: ", 1, 1000);
-
-
+    egreso = IngresarEntero("\nID Auto: ", 1, 1000);
 
     index=buscarAiporid(listaAi,tama,egreso);
 
+    printf("id %d", listaAi[index].id);
 
-    if(index!=-1)
+    if(index!=-1 && listaAi[index].estado == 1)
     {
+        index=buscarAi(listaAi,tama,egreso);
 
-         index=buscarAi(listaAi,tamau,egreso);
+        if(index!=-1)
+        {
 
-         if(index!=-1)
-         {
-         imprimirmarcayprecio(listaAi[index].marca);
+            indexu=buscarUsuario(lista,tamu,listaAi[index].idUsuario);
 
-         listaAi[index].estado=0;
+            if(indexu!=-1)
+            {
+            printf("\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+            printf("\tPropietario: %s", lista[indexu].nombre);
+            }
 
-
-        indexu=buscarUsuario(lista,tamau,listaAi[index].idUsuario);
-
-        if(indexu!=-1)
-         {
-
-        printf("Nombre Propietario: %s", lista[indexu].nombre);
+            printf(" Patente: %s \n\tMarca\t\t Total ", listaAi[index].patente);
 
 
-         }
+            imprimirmarcayprecio(listaAi[index].marca);
 
-       }
+            //if(Confirmacion("Confirma la Baja?"))
+          //  {
+
+
+                listaAi[index]=aux;
+                printf("cambio estado %d", listaAi[index].estado);
+
+           // }
+
+        }
     }
 
 
 
     else
     {
-        printf("Autio no encontrado!!!");
+        printf("Auto no encontrado");
 
     }
 
 
-
-
-
-
 }
-
-
 
 int buscarAiporid(eAutoi vec[],int tam,int id)
 {
@@ -299,6 +412,19 @@ int buscarAiporid(eAutoi vec[],int tam,int id)
     return retorno;
 }
 
+int buscarAi(eAutoi vec[],int tam,int id)
+{
+
+    int retorno= -1;
+    for(int i=0; i<tam; i++)
+    {
+        if(vec[i].idUsuario==id)
+        {
+            retorno = i;
+        }
+    }
+    return retorno;
+}
 
 int buscarAemarca(eAutoe vec[],int tam,int marca)
 {
@@ -334,11 +460,11 @@ int buscarAimarca(eAutoi vec[],int tam,int marca)
 void cargarDatosHardCodePersona(eUsuario lista[])
 {
 
-     int idUsuario[4]= {1,2,3,4};
-     char nombre[4][25]= {"Juan","Luis","Maria","Jose"};
-     char tarjeta[4][20]= {"111-111","222-222","333-333","444-444"};
-     char direccion[4][20]= {"mitre","urquiza","belgrano","alsina"};
-     int estado[4]= {1,1,1,1};
+    int idUsuario[4]= {1,2,3,4};
+    char nombre[4][25]= {"Juan","Luis","Maria","Jose"};
+    char tarjeta[4][20]= {"111-111","222-222","333-333","444-444"};
+    char direccion[4][20]= {"mitre","urquiza","belgrano","alsina"};
+    int estado[4]= {1,1,1,1};
 
 
 
@@ -370,6 +496,8 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
             printf("\nID N: %d",lista[i].idUsuario);
             printf("\nNombre: ");
             puts(lista[i].nombre);
+            printf("\nTarjeta: ");
+            puts(lista[i].tarjeta);
 
 
 
@@ -380,69 +508,6 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
 
 
 
-}
-
-
-void AltaPorducto(eAutoi lista[], eUsuario listau[], int tam_u, int tam)
-{
-    int indexusuario;
-    int index;
-    int numusuario;
-
-    numusuario = IngresarEntero("ID Usuario: ", 1, 1000);
-
-    indexusuario=buscarUsuario(listau,tam_u,numusuario);
-
-    if(indexusuario!=-1)
-    {
-        index=buscarProductoLibre(lista,tam);
-
-        if(index!=-1)
-        {
-           lista[index].id = index+1;
-
-
-           getString("\nIngrese Patente: ",lista[index].patente, 3,25);
-           lista[index].marca = IngresarEntero("\nIngrese Marca: ", 1, 1000);
-
-
-
-            lista[index].estado = 1;
-
-            lista[index].idUsuario = listau[indexusuario].idUsuario;
-
-        }
-        else
-        {
-            printf("No hay mas espacio para Guardar Autos!!!");
-
-        }
-
-    }
-    else
-    {
-        printf("El Usuario no existe");
-
-    }
-
-
-
-}
-
-int buscarProductoLibre(eAutoi vec[],int tam)
-{
-    int index = -1;
-
-    for(int i=0; i<tam; i++)
-    {
-        if(vec[i].id==0)
-        {
-            index=i;
-            break;
-        }
-    }
-
-    return index;
 }
 
 
@@ -454,6 +519,7 @@ void cargarDatosHardCodeAutoi(eAutoi lista[])
     char patente[10][20]= {"AAA","CCC","DDD","BBB","ZZZ","III","HHH","EEE","FFF","GGG"};
     int marca[10]= {1,3,3,2,2,3,3,4,3,1};
     int propietario[10]= {2,1,2,1,3,3,4,1,4,3};
+    int estado[10]= {0,1,1,1,1,1,1,1,1,1};
 
 
     for(int i=0; i<10; i++)
@@ -462,6 +528,7 @@ void cargarDatosHardCodeAutoi(eAutoi lista[])
         strcpy(lista[i].patente, patente[i]);
         lista[i].id=id[i];
         lista[i].marca=marca[i];
+        lista[i].estado=estado[i];
         lista[i].idUsuario=propietario[i];
 
 
