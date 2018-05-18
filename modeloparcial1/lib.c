@@ -245,6 +245,9 @@ void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
         printf("\nNombre: %s\n", lista[index].nombre);
         if(Confirmacion("Confirma la Baja?"))
         {
+
+            //alta en egresos falta
+
             total = calculadorDeuda(listaAi,tamai,numusuario);
 
             if(total!=0)
@@ -400,6 +403,8 @@ void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, 
         if(Confirmacion("Confirma la Baja?"))
         {
             listaAi[index].estado=aux.estado;
+
+            //hACER FUNCION ALTA EGRESOS
 
             indexae=buscarAutoEgresadoLibre(listaAe,tama);
 
