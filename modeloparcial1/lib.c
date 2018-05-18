@@ -216,7 +216,7 @@ int buscarUsuario(eUsuario vec[],int tam,int id)
     int retorno= -1;
     for(int i=0; i<tam; i++)
     {
-        if(vec[i].idUsuario==id)
+        if(vec[i].idUsuario==id && vec[i].estado ==1)
         {
             retorno = i;
         }
@@ -229,11 +229,14 @@ int buscarUsuario(eUsuario vec[],int tam,int id)
 
 void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
 {
+    eUsuario aux={0};
     int numusuario;
     int index;
     float total;
 
-    numusuario = IngresarEntero("\nID Usuario: ", 1, 100);
+    mostrarListaUsuarios(lista, tamu);
+
+    numusuario = IngresarEntero("\nBAJA DEL PROPIETARIO Ingrese ID Usuario: ", 1, 100);
 
     index=buscarUsuario(lista,tamu,numusuario);
 
@@ -255,7 +258,8 @@ void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
             {
                 printf("\nEL USUARIO NO TIENE\nAUTOS INGRESADOS");
             }
-            lista[index].estado=0;
+
+            lista[index].estado=aux.estado;
         }
     }
     else
@@ -366,7 +370,7 @@ int buscarAutoLibre(eAutoi vec[],int tam)
 void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, int tamu)
 {
 
-
+    eAutoi aux={0};
     int egreso;
     int index;
     int indexu;
@@ -395,7 +399,7 @@ void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, 
 
             if(Confirmacion("Confirma la Baja?"))
            {
-                listaAi[index].estado=0;
+                listaAi[index].estado=aux.estado;
 
                 indexae=buscarAutoEgresadoLibre(listaAe,tama);
 
@@ -510,19 +514,15 @@ int buscarAimarca(eAutoi vec[],int tam,int marca)
 void mostrarListaUsuarios(eUsuario lista[],int tam)
 {
 
+          printf("\nID N:\t\tNombre\t\tTarjeta");
+
 
     for(int i=0; i<tam; i++)
     {
-        if(lista[i].estado==1)
+
+        if(lista[i].estado == 1)
         {
-            printf("\n-----------------------------------------------------");
-            printf("\nID N: %d",lista[i].idUsuario);
-            printf("\nNombre: ");
-            puts(lista[i].nombre);
-            printf("\nTarjeta: ");
-            puts(lista[i].tarjeta);
-
-
+            printf("\n%d\t\t%s\t\t%s\t\t",lista[i].idUsuario,lista[i].nombre,lista[i].tarjeta);
 
 
         }
@@ -530,7 +530,7 @@ void mostrarListaUsuarios(eUsuario lista[],int tam)
     }
 
 
-
+  printf("\n--------------------------------------------------------------\n");
 }
 
 void mostrarListaAutos(eAutoi lista[],int tam)
@@ -680,6 +680,35 @@ void DatosUsuario(eUsuario listau[], eAutoi lista[],int tamu, int tama)
     }
 
 }
+//9. Todos los datos de los propietarios cuyos autos estacionados sean de la marca AUDI.-
+
+void propietariosAudi(eUsuario listau[], eAutoi lista[],int tamu, int tama)
+{
+
+       for (int j=0; j<tamu; j++)
+       {
+        if(listau[j].estado==1)
+        {
+            for(int i=0; i<tama; i++)
+           {
+                if(lista[i].marca==AUDI && listau[j].idUsuario == lista[i].idUsuario && lista[i].estado==1)
+                {
+                    printf("\n%s\t\t",listau[j].nombre);
+                    printf("%s\t\t",listau[j].direccion);
+                    printf("%s\t\t",listau[j].tarjeta);
+                    break;
+
+                }
+        }
+
+
+           }
+
+      }
+
+
+}
+
 
 
 //HardCode
@@ -691,7 +720,7 @@ void cargarDatosHardCodePersona(eUsuario lista[])
     int idUsuario[4]= {1,2,3,4};
     char nombre[4][25]= {"Juan","Luis","Maria","Jose"};
     char tarjeta[4][20]= {"111-111","222-222","333-333","444-444"};
-    char direccion[4][20]= {"mitre","urquiza","belgrano","alsina"};
+    char direccion[4][20]= {"mitre   ","urquiza ","belgrano","alsina  "};
     int estado[4]= {1,1,1,1};
 
 
@@ -713,7 +742,7 @@ void cargarDatosHardCodeAutoi(eAutoi lista[])
 
     int id[10]= {1,2,3,4,5,6,7,8,9,10};
     char patente[10][20]= {"AAA","CCC","DDD","BBB","ZZZ","III","HHH","EEE","FFF","GGG"};
-    int marca[10]= {1,3,3,2,2,3,3,4,3,1};
+    int marca[10]=       {1,3,3,2,2,3,3,4,3,1};
     int propietario[10]= {2,1,2,1,3,3,4,1,4,3};
     int estado[10]= {1,1,1,1,1,1,1,1,1,1};
 

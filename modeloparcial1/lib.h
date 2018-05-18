@@ -230,11 +230,13 @@ void mostrarListaAutos(eAutoi [],int );
 
 void imprimirmarca(int );
 
-void recaudacionTotal(eAutoe vec[],int tama);
+void recaudacionTotal(eAutoe vec[],int );
 
-void recaudacionMarca(eAutoe vec[],int tama);
+void recaudacionMarca(eAutoe vec[],int );
 
 void DatosUsuario(eUsuario [], eAutoi [],int , int );
+
+void propietariosAudi(eUsuario [], eAutoi [],int , int );
 
 
 #endif

@@ -77,17 +77,18 @@ int main()
 
                 case 8:
                         DatosUsuario(ListaUsuario, ListaAutoi, TAM_U, TAM_A);
-                        break;   /*
-                case 9:
-                        mostrarListaAutos(ListaAuto, ListaUsuario, TAM_U, TAM_A);
                         break;
-   */
+                case 9:
+                        propietariosAudi(ListaUsuario, ListaAutoi, TAM_U, TAM_A);
+
+                        break;
+                        /*
 
                     case 10:
                         mostrarListaUsuarios(ListaUsuario, TAM_U);
                         break;
 
-
+                        */
    }
 
             printf("\n\n");
