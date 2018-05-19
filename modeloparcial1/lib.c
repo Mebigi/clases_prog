@@ -227,7 +227,7 @@ int buscarUsuario(eUsuario vec[],int tam,int id)
 //3. BAJA DEL USUARIO: Se ingresa el ID del usuario y eliminará junto con todos
 //sus productos a la venta.
 
-void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
+void BajaUsuario(eUsuario lista[], eAutoi listaAi[], eAutoe listaAe[], int tamu, int tamai)
 {
     eUsuario aux= {0};
     int numusuario;
@@ -246,9 +246,9 @@ void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
         if(Confirmacion("Confirma la Baja?"))
         {
 
-            //alta en egresos falta
+            total = calculadorDeuda(listaAe,listaAi,tamai,numusuario);
 
-            total = calculadorDeuda(listaAi,tamai,numusuario);
+
 
             if(total!=0)
             {
@@ -264,6 +264,10 @@ void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
 
             lista[index].estado=aux.estado;
         }
+        else
+    {
+        printf("\n\nOperaci%cn Cancelada", 162);
+    }
     }
     else
     {
@@ -274,11 +278,12 @@ void BajaUsuario(eUsuario lista[], eAutoi listaAi[], int tamu, int tamai)
 
 
 
-float calculadorDeuda(eAutoi vec[],int tam,int id)
+float calculadorDeuda(eAutoe listaAe[], eAutoi vec[],int tam,int id)
 {
 
     float total=0;
     eAutoi aux= {0};
+    float importe;
 
     printf("\n\n+++++++TICKET: Estad%ca+++++++\n", 161);
 
@@ -286,7 +291,14 @@ float calculadorDeuda(eAutoi vec[],int tam,int id)
     {
         if(vec[i].idUsuario==id)
         {
-            total += imprimirmarcayprecio(vec[i].marca);
+
+
+            importe = imprimirmarcayprecio(vec[i].marca);
+
+            total +=importe;
+
+            AltaEgreso(listaAe, tam, vec[i].marca, importe);
+
             vec[i]=aux;
         }
     }
@@ -377,7 +389,6 @@ void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, 
     int egreso;
     int index;
     int indexu;
-    int indexae;
     int importe;
 
     mostrarListaAutos(listaAi, tama);
@@ -404,20 +415,7 @@ void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, 
         {
             listaAi[index].estado=aux.estado;
 
-            //hACER FUNCION ALTA EGRESOS
-
-            indexae=buscarAutoEgresadoLibre(listaAe,tama);
-
-            if(indexae!=-1)
-            {
-                listaAe[indexae].marca= listaAi[index].marca;
-                listaAe[indexae].importe = importe;
-
-            }
-            else
-            {
-                printf("No hay espacio para guardar autos egresados");
-            }
+            AltaEgreso(listaAe, tama, listaAi[index].marca, importe);
 
 
         }
@@ -432,6 +430,26 @@ void EgresoAuto(eAutoe listaAe[], eAutoi listaAi[], eUsuario lista[], int tama, 
         printf("Auto no encontrado");
 
     }
+
+
+}
+
+void AltaEgreso(eAutoe listaAe[], int tama, int marca, float importe)
+{
+
+            int indexae;
+            indexae=buscarAutoEgresadoLibre(listaAe,tama);
+
+            if(indexae!=-1)
+            {
+                listaAe[indexae].marca= marca;
+                listaAe[indexae].importe = importe;
+
+            }
+            else
+            {
+                printf("No hay espacio para guardar autos egresados");
+            }
 
 
 }
@@ -512,32 +530,6 @@ int buscarAimarca(eAutoi vec[],int tam,int marca)
     return retorno;
 }
 
-
-
-//10. LISTAR USUARIOS:
-
-void mostrarListaUsuarios(eUsuario lista[],int tam)
-{
-
-    printf("\nID N:\t\tNombre\t\tTarjeta");
-
-
-    for(int i=0; i<tam; i++)
-    {
-
-        if(lista[i].estado == 1)
-        {
-            printf("\n%d\t\t%s\t\t%s\t\t",lista[i].idUsuario,lista[i].nombre,lista[i].tarjeta);
-
-
-        }
-
-    }
-
-
-    printf("\n--------------------------------------------------------------\n");
-}
-
 void mostrarListaAutos(eAutoi lista[],int tam)
 {
 
@@ -585,7 +577,7 @@ void recaudacionTotal(eAutoe lista[],int tam)
         }
 
     }
-    printf("\nTOTAL:\t\t\t\t%.2f\n",total);
+    printf("\nRECAUDACION TOTAL:\t\t\t\t%.2f\n",total);
     printf("\n--------------------------------------------------------------------");
 
 }
@@ -748,6 +740,66 @@ imprimirListadoUsuarioAuto(planilla, tama);
 
 }
 
+//11. LISTAR USUARIOS:
+
+void mostrarListaUsuarios(eUsuario lista[],int tam)
+{
+    printf("\nLISTADO DE USUARIOS ACTIVOS\n\n");
+
+    printf("ID N:\t\tNombre\t\tTarjeta");
+     printf("\n--------------------------------------------------------------\n");
+
+
+    for(int i=0; i<tam; i++)
+    {
+
+        if(lista[i].estado == 1)
+        {
+            printf("\n%d\t\t%s\t\t%s\t\t",lista[i].idUsuario,lista[i].nombre,lista[i].tarjeta);
+
+
+        }
+
+    }
+
+
+    printf("\n--------------------------------------------------------------\n");
+}
+
+
+//12. LISTAR Usuarios inactivos:
+
+void mostrarListaUsuariosInactivos(eUsuario lista[],int tam)
+{
+    int flag=0;
+    printf("\nLISTADO DE USUARIOS INACTIVOS\n\n");
+
+    printf("ID N:\t\tNombre\t\tTarjeta");
+     printf("\n--------------------------------------------------------------\n");
+
+
+    for(int i=0; i<tam; i++)
+    {
+
+        if(lista[i].estado == 0 && lista[i].idUsuario !=0)
+        {
+            printf("\n%d\t\t%s\t\t%s\t\t",lista[i].idUsuario,lista[i].nombre,lista[i].tarjeta);
+
+            flag=1;
+
+
+        }
+
+    }
+    if(flag==0)
+    {
+         printf("No hay Usuarios dados de baja");
+    }
+
+
+    printf("\n--------------------------------------------------------------\n");
+}
+
 
 
 void imprimirListadoUsuarioAuto (eUsuarioAuto lista[], int tam)
@@ -810,6 +862,31 @@ void imprimirListadoUsuarioAuto (eUsuarioAuto lista[], int tam)
 
 
  }
+
+
+
+ void ListadoAutosEgresados(eAutoe lista[],int tam)
+{
+
+    printf("\nMarca\t\t\tImporte N\t\n");
+    printf("\n--------------------------------------------------------------------\n");
+    for(int i=0; i<tam; i++)
+    {
+
+
+        if(lista[i].importe!=0)
+        {
+            imprimirmarca(lista[i].marca);
+            printf("\t\t\t%.2f\n",lista[i].importe);
+
+
+        }
+
+    }
+
+    printf("\n--------------------------------------------------------------------");
+
+}
 
 //HardCode
 

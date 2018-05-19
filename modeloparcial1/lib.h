@@ -48,7 +48,7 @@ void EgresoAuto(eAutoe [], eAutoi [], eUsuario [], int , int );
 
 int buscarAiporid(eAutoi [],int ,int );
 
-float calculadorDeuda(eAutoi [],int ,int );
+float calculadorDeuda(eAutoe [], eAutoi [],int ,int );
 
 int buscarAutoEgresadoLibre(eAutoe [],int );
 
@@ -66,9 +66,10 @@ int buscarUsuario(eUsuario [],int ,int );
 
 int buscarAi(eAutoi [],int ,int );
 
-void BajaUsuario(eUsuario [], eAutoi [], int, int);
+void BajaUsuario(eUsuario [], eAutoi [], eAutoe [], int, int);
 
 void mostrarListaUsuarios(eUsuario [],int );
+void mostrarListaUsuariosInactivos(eUsuario [],int );
 
 void cargarDatosHardCodePersona(eUsuario []);
 
@@ -105,6 +106,7 @@ void cargarDatosHardCodeAutoe(eAutoe lista[]);
 
 void mostrarListaAutos(eAutoi [],int );
 
+
 void imprimirmarca(int );
 
 void recaudacionTotal(eAutoe vec[],int );
@@ -120,5 +122,9 @@ void autosEstacionados(eAutoi [], eUsuario [],int , int );
 void ordenarListadoUsuarioAuto(eUsuarioAuto [], int);
 
 void imprimirListadoUsuarioAuto (eUsuarioAuto [], int );
+
+void AltaEgreso(eAutoe [], int, int, float );
+
+void ListadoAutosEgresados(eAutoe vec[],int );
 
 #endif

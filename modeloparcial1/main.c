@@ -41,13 +41,17 @@ int main()
             printf("8. CONSULTA DATOS PROPIETARIO POR ID\n");
             printf("9. PROPIETARIOS DE LA MARCA AUDI\n");
             printf("10. LISTADO DE LOS AUTOS ESTACIONADOS y PROPIETARIOS\n");
-            printf("11. Salir\n");
+            printf("11. LISTADO USUARIOS ACTIVOS\n");
+            printf("12. LISTADO USUARIOS INACTIVOS\n");
+            printf("13. LISTADO AUTOS EGRESOSADOS\n");
+            printf("14. LISTADO AUTOS INGRESADOS\n");
+            printf("15. Salir\n");
 
 
 
             printf("\nINGRESAR UNA OPCION: ");
 
-            opcion = IngresarOpcionMenu(1,11);
+            opcion = IngresarOpcionMenu(1,15);
 
             printf("\n....................................................................");
 
@@ -61,7 +65,7 @@ int main()
                 ModificacionUsuario(ListaUsuario, TAM_U);
                 break;
             case 3:
-                BajaUsuario(ListaUsuario, ListaAutoi, TAM_U, TAM_A);
+                BajaUsuario(ListaUsuario, ListaAutoi, ListaAutoe, TAM_U, TAM_A);
                 break;
             case 4:
                 AltaAuto(ListaAutoi, ListaUsuario, TAM_U, TAM_A);
@@ -83,13 +87,23 @@ int main()
                 break;
             case 9:
                 propietariosAudi(ListaUsuario, ListaAutoi, TAM_U, TAM_A);
-
                 break;
-
-
-                case 10:
+            case 10:
                 autosEstacionados(ListaAutoi, ListaUsuario, TAM_A, TAM_U);
                 break;
+            case 11:
+                mostrarListaUsuarios(ListaUsuario, TAM_U);
+                break;
+            case 12:
+                mostrarListaUsuariosInactivos(ListaUsuario, TAM_U);
+                break;
+            case 13:
+                mostrarListaAutos(ListaAutoi, TAM_A);
+                break;
+            case 14:
+                ListadoAutosEgresados(ListaAutoe, TAM_A);
+                break;
+
 
              }
 
@@ -98,7 +112,7 @@ int main()
             system("cls");
 
         }
-        while(opcion!=11);
+        while(opcion!=16);
 
 
 
