@@ -4,7 +4,7 @@
 #define TAM 20
 #define CANTA 3
 
-typedef struct
+struct eAlumno
 {
   char nombre[TAM];
   int legajo;
@@ -12,7 +12,7 @@ typedef struct
   int nota2;
   float promedio;
   char email[TAM];
-} eAlumno;
+}
 
 int main()
 {

@@ -180,6 +180,7 @@ void ModificacionUsuario(eUsuario lista[],int tam)
     int index;
     char tarjeta[17]; //16 numero mas el espacio
 
+    mostrarListaUsuarios(lista, tam);
 
     numusuario = IngresarEntero("\nID Usuario: ", 1, 100); //hasta 100 usuarios puede haber
 
@@ -199,7 +200,7 @@ void ModificacionUsuario(eUsuario lista[],int tam)
         }
         else
         {
-            printf("\nOperaci%cn Cancelada", 162);
+            printf("\n\nOperaci%cn Cancelada", 162);
         }
 
     }

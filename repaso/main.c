@@ -13,6 +13,15 @@ int vector[8] = {9,7,6,15,16,5,10,11};
 insertion(vector,8);
 
 
+char saludo1[10]="hola";
+char saludo2[10]={'h','o','l','a','\0'};
+char saludo3[ ]="hola";
+
+
+char menu[5][20]={"zorro","tortuga","puma","leon","jirafa"};
+
+
+
 int i;
 int suma = 0;
 int max = INT_MIN; // constante definida en limits.h

@@ -43,8 +43,8 @@ int main()
             printf("10. LISTADO DE LOS AUTOS ESTACIONADOS y PROPIETARIOS\n");
             printf("11. LISTADO USUARIOS ACTIVOS\n");
             printf("12. LISTADO USUARIOS INACTIVOS\n");
-            printf("13. LISTADO AUTOS EGRESOSADOS\n");
-            printf("14. LISTADO AUTOS INGRESADOS\n");
+            printf("13. LISTADO AUTOS INGRESADOS\n");
+            printf("14. LISTADO AUTOS EGRESOSADOS\n");
             printf("15. Salir\n");
 
 

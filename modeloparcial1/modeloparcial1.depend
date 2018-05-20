@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
-1525655402 source:c:\programacion1cuatri\clases_prog\modeloparcial1\main.c
+1526842033 source:c:\programacion1cuatri\clases_prog\modeloparcial1\main.c
 	"lib.h"
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 
-1525661287 c:\programacion1cuatri\clases_prog\modeloparcial1\lib.h
+1526841948 c:\programacion1cuatri\clases_prog\modeloparcial1\lib.h
 
-1525655571 source:c:\programacion1cuatri\clases_prog\modeloparcial1\lib.c
+1526842098 source:c:\programacion1cuatri\clases_prog\modeloparcial1\lib.c
 	"lib.h"
+	"time.h"
 	"ingresodatos.h"
 	<stdio.h>
 	<stdlib.h>
@@ -21,14 +22,15 @@
 	<time.h>
 	<string.h>
 
-1525652145 source:c:\programacion1cuatri\clases_prog\modeloparcial1\ingresodatos.c
+1526829295 source:c:\programacion1cuatri\clases_prog\modeloparcial1\ingresodatos.c
 	"ingresodatos.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	<conio.h>
 
-1525656943 c:\programacion1cuatri\clases_prog\modeloparcial1\ingresodatos.h
+1526829295 c:\programacion1cuatri\clases_prog\modeloparcial1\ingresodatos.h
 
 1525655891 source:c:\programacion1cuatri\clases_prog\modeloparcial1\operaciones.c
 	"operaciones.h"
